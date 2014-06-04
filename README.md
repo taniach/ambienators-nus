@@ -1,4 +1,5 @@
 Ambienators
 ===========
 
-Smart Ambient Sensor System for NUS Orbital 2014 project
+Smart Ambient Sensor System 
+NUS Orbital 2014 project
