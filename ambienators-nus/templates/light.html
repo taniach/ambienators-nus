@@ -1,0 +1,83 @@
+<!-- Light -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartAmbient - Light</title>
+
+  <!-- Bootstrap Simplex-->
+  <link href="../simplex/bootstrap.min.css" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+
+      <!-- Top navbar -->
+      <div class="navbar navbar-inverse">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">SmartAmbient Sensor</a>
+        </div>
+
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/mainuser">Home</a></li>
+            <li><a href="/temperature">Temperature</a></li>
+            <li class="active"><a href="">Light</a></li>
+            <li><a href="/motion">Motion</a></li>
+            <li class="dropdown">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">History<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/historytemp">Temperature</a></li>
+                <li><a href="/historylight">Light</a></li>
+                <li><a href="/historymotion">Motion</a></li>
+              </ul>
+            </li>
+            <li><a href="/settings">Settings</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>{{ user_mail }}</a></li>
+            <li><a href="{{ logout }}">Logout</a></li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="container">
+        <p class="current-reading">Current light intensity: <span>1500</span><span> lumens</span></p>
+        <div class ="view-history">
+          <a class="btn btn-primary" href="/historylight">View History</a>
+        </div>
+        <hr/>
+
+        <footer>
+          <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
+        </footer>
+
+      </div>
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="../bootstrap/js/bootstrap.min.js"></script>
+    </body>
+    </html>

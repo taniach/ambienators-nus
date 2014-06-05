@@ -1,0 +1,22 @@
+.jumbotron {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+footer {
+	margin-bottom: 20px;
+}
+
+hr {
+	margin-top: 50px;
+}
+
+.current-reading {
+	text-align: center;
+	font-size: 2em;
+	margin: 50px 0 40px 0;
+}
+
+.view-history {
+	text-align: center;
+}
