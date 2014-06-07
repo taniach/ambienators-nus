@@ -110,7 +110,10 @@
                     document.getElementById('above-below-light').disabled = true;
                     document.getElementById('inputLightParameter').disabled = true;
                     document.getElementById('present-notpresent').disabled = true;
-                    document.getElementById('precedence').disabled = true;">
+                    document.getElementById('tbox').disabled = true;
+                    document.getElementById('lbox').disabled = true;
+                    document.getElementById('mbox').disabled = true;
+                    ">
                     <span class="radio-option text-primary">By time</span>
                   </label>
                 </div>
@@ -150,8 +153,9 @@
                     document.getElementById('above-below-light').disabled = false;
                     document.getElementById('inputLightParameter').disabled = false;
                     document.getElementById('present-notpresent').disabled = false;
-                    document.getElementById('precedence').disabled = false;
-                    
+                    document.getElementById('tbox').disabled = false;
+                    document.getElementById('lbox').disabled = false;
+                    document.getElementById('mbox').disabled = false;
                     ">
                     <span class="radio-option text-primary">By parameters</span>
                   </label>
@@ -164,7 +168,7 @@
 
                 <div class="form-group">
                   <label class="col-lg-1 box">
-                    <input type="checkbox" name="parameter" value="temperature">
+                    <input type="checkbox" name="parameter" value="temperature" id="tbox">
                   </label>
                   <label for="select" class="col-lg-2 control-label">Temperature</label>
 
@@ -197,7 +201,7 @@
                 <!-- Light -->
                 <div class="form-group">
                   <label class="col-lg-1 box">
-                    <input type="checkbox" name="parameter" value="light-intensity">
+                    <input type="checkbox" name="parameter" value="light-intensity" id="lbox">
                   </label>
                   <label for="select" class="col-lg-2 control-label">Light intensity</label>
 
@@ -225,7 +229,7 @@
                 <!-- Motion -->
                 <div class="form-group">
                   <label class="col-lg-1 box">
-                    <input type="checkbox" name="parameter" value="motion">
+                    <input type="checkbox" name="parameter" value="motion" id="mbox">
                   </label>
 
                   <label for="select" class="col-lg-2 control-label">Motion</label>
