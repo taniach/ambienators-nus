@@ -20,3 +20,45 @@ hr {
 .view-history {
 	text-align: center;
 }
+
+.history {
+	margin: 20px 0px 30px 0px;
+}
+
+.radio {
+	clear: both;
+	padding-bottom: 10px;
+}
+
+.extra-space{
+	height: 40px;
+}
+
+.extra-space2 {
+	height: 15px;
+}
+
+.percent {
+	margin-top: 0.8%;
+	font-size: 1.1em;
+}
+
+.save {
+	width: 70px;
+	margin-left: 5px;
+}
+
+.radio-option {
+	font-size: 1.1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.help-block {
+	font-size: 0.9em;
+}
+
+.box {
+	width: 10px;
+	padding-top: 0.9%;
+}

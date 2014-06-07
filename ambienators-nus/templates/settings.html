@@ -1,0 +1,327 @@
+<!-- Settings -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartAmbient - Settings</title>
+
+  <!-- Bootstrap Simplex-->
+  <link href="../simplex/bootstrap.min.css" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+
+      <!-- Top navbar -->
+      <div class="navbar navbar-inverse">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">SmartAmbient Sensor</a>
+        </div>
+
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/mainuser">Home</a></li>
+            <li><a href="/temperature">Temperature</a></li>
+            <li><a href="/light">Light</a></li>
+            <li><a href="/motion">Motion</a></li>
+            <li><a href="/history">History</a></li>
+            <li class="active"><a href="">Settings</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>{{ user_mail }}</a></li>
+            <li><a href="{{ logout }}">Logout</a></li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="container">
+        <div class="extra-space"></div>
+
+        <form class="form-horizontal" action="/settings-temp" method="get">
+          <fieldset>
+
+            <legend>Temperature settings</legend>
+
+            <div class="form-group">
+              <label class="col-lg-1 control-label"></label>
+              <div class="col-lg-10">
+                <br/>
+
+                <label for="select" class="col-lg-1 control-label">Unit</label>
+                <!-- Units -->
+                <div class="col-lg-2">
+                  <select class="form-control" id="select-unit" name="select-unit">
+                    <option value="celsius">&deg;C</option>
+                    <option value="fahrenheit">&deg;F</option>
+                    <option value="kelvin">K</option>
+                  </select>
+                </div>
+                <br/>
+
+              </div>
+            </div>
+
+            <div class="extra-space"></div>
+
+          </fieldset>
+        </form> <!-- End temperature settings -->
+
+        <form class="form-horizontal">
+          <fieldset>
+
+            <legend>Notification settings</legend>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">How should I be notified?</label>
+              <div class="col-lg-10">
+
+                <!-- By time -->
+
+                <!-- Time radio button -->
+
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onclick=
+                    "document.getElementById('inputNumber').disabled = false;
+                    document.getElementById('select-time').disabled = false;
+                    document.getElementById('above-below-temp').disabled = true;
+                    document.getElementById('inputTempParameter').disabled = true;
+                    document.getElementById('temp-unit').disabled = true;
+                    document.getElementById('above-below-light').disabled = true;
+                    document.getElementById('inputLightParameter').disabled = true;
+                    document.getElementById('present-notpresent').disabled = true;
+                    document.getElementById('precedence').disabled = true;">
+                    <span class="radio-option text-primary">By time</span>
+                  </label>
+                </div>
+                <div class="extra-space2"></div>
+
+                <!-- Time options -->
+                
+                <label for="select" class="col-lg-1 control-label">Every</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="1" min="1" class="form-control" id="inputNumber" placeholder="30">
+                </div>
+                <!-- Units -->
+                <div class="col-lg-2">
+                  <select class="form-control" id="select-time">
+                    <option>minutes</option>
+                    <option>hours</option>
+                    <option>days</option>
+                    <option>weeks</option>
+                    <option>months</option>
+                  </select>
+                </div>
+                <br/>
+                <div class="extra-space"></div>
+
+                <!-- By parameters -->
+
+                <!-- Parameter radio button -->
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick=
+                    "document.getElementById('inputNumber').disabled = true;
+                    document.getElementById('select-time').disabled = true;
+                    document.getElementById('above-below-temp').disabled = false;
+                    document.getElementById('inputTempParameter').disabled = false;
+                    document.getElementById('temp-unit').disabled = false;
+                    document.getElementById('above-below-light').disabled = false;
+                    document.getElementById('inputLightParameter').disabled = false;
+                    document.getElementById('present-notpresent').disabled = false;
+                    document.getElementById('precedence').disabled = false;
+                    
+                    ">
+                    <span class="radio-option text-primary">By parameters</span>
+                  </label>
+                </div>
+                <div class="extra-space2"></div>
+
+                <!-- Parameter options -->
+
+                <!-- Temperature -->
+
+                <div class="form-group">
+                  <label class="col-lg-1 box">
+                    <input type="checkbox" name="parameter" value="temperature">
+                  </label>
+                  <label for="select" class="col-lg-2 control-label">Temperature</label>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="above-below-temp">
+                      <option>---</option>
+                      <option>above</option>
+                      <option>below</option>
+                      <option>exactly</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-2">
+                    <input type="number" step="5" class="form-control" id="inputTempParameter" placeholder="---">
+                  </div>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="temp-unit">
+                      <option>---</option>
+                      <option>&deg;C</option>
+                      <option>&deg;F</option>
+                      <option>K</option>
+                    </select>
+                  </div>
+
+                  <br/>
+                  
+                </div> <!-- End temperature -->
+
+                <!-- Light -->
+                <div class="form-group">
+                  <label class="col-lg-1 box">
+                    <input type="checkbox" name="parameter" value="light-intensity">
+                  </label>
+                  <label for="select" class="col-lg-2 control-label">Light intensity</label>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="above-below-light">
+                      <option>---</option>
+                      <option>above</option>
+                      <option>below</option>
+                      <option>exactly</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-2">
+                    <input type="number" min="0" max="100" step="10" class="form-control" id="inputLightParameter" placeholder="---">
+                  </div>
+
+                  <div class="col-lg-2 percent">
+                    <span>%</span>
+                  </div>
+
+                  <br/>
+                  
+                </div> <!-- End light -->
+
+                <!-- Motion -->
+                <div class="form-group">
+                  <label class="col-lg-1 box">
+                    <input type="checkbox" name="parameter" value="motion">
+                  </label>
+
+                  <label for="select" class="col-lg-2 control-label">Motion</label>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="present-notpresent">
+                      <option>---</option>
+                      <option>present</option>
+                      <option>not present</option>
+                    </select>
+                  </div>
+
+                  <br/>
+                  <div class="extra-space"></div>
+                </div> <!-- End motion -->
+
+              </div>
+            </div>
+
+          </fieldset>
+        </form>  <!-- End notification settings -->
+
+        <div class="extra-space2"></div>
+
+        <form class="form-horizontal">
+          <fieldset>
+
+            <legend>History settings</legend>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">How often should history be logged?</label>
+              <div class="col-lg-10">
+                <br/>
+
+                <label for="select" class="col-lg-1 control-label">Every</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="1" min="1" class="form-control" id="inputHistory" placeholder="30">
+                </div>
+                <!-- Units -->
+                <div class="col-lg-2">
+                  <select class="form-control" id="select-time">
+                    <option>minutes</option>
+                    <option>hours</option>
+                    <option>days</option>
+                    <option>weeks</option>
+                    <option>months</option>
+                  </select>
+                </div>
+                <br/>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">How many readings to display?</label>
+              <div class="col-lg-10">
+                <br/>
+
+                <label for="select" class="col-lg-1 control-label">Last</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="1" min="1" max="50" class="form-control" id="inputReadings" placeholder="5">
+                </div>
+                <div class="col-lg-2 percent">
+                  <span>readings</span>
+                </div>
+                <br/>
+              </div>
+            </div>
+            <div class="extra-space"></div>
+
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary save">Save</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form> <!-- End history settings -->
+
+        <div class="extra-space"></div>
+        <div class="extra-space2"></div>
+        <hr/>
+
+        <footer>
+          <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
+        </footer>
+
+      </div>
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="../bootstrap/js/bootstrap.min.js"></script>
+    </body>
+    </html>
