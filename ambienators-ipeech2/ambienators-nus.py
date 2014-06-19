@@ -1,43 +1,33 @@
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
 import datetime
- 
-from google.appengine.ext import db
-
-
-
-
-import os
 import urllib
+import cgi
+import webapp2
+import jinja2
+import os
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
-import jinja2
-import webapp2
-
 jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"),
-    extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"))
 
  
-class ArduinoSensorData(db.Model):
-    temp = db.IntegerProperty(default=0)
-    light = db.IntegerProperty(default=0)
-    list = db.StringListProperty()
-    lastmovement = db.DateTimeProperty(auto_now_add=True)
-    lastupdate = db.DateTimeProperty(auto_now_add=True)
+class ArduinoSensorData(ndb.Model):
+    temp = ndb.FloatProperty()
+    light = ndb.FloatProperty()
+    list = ndb.StringProperty(repeated=True)
+    lastmovement = ndb.DateTimeProperty(auto_now_add=True)
+    lastupdate = ndb.DateTimeProperty(auto_now_add=True)
  
 class ArduinoPost(webapp2.RequestHandler):
     def post(self):
         sensordata = ArduinoSensorData.get_or_insert('1')
 
         try:
-            temp = int(self.request.get('temp'))
+            temp = float(self.request.get('temp'))
             movement = int(self.request.get('movement'))
             moves = int(self.request.get('moves'))
-            light = int(self.request.get('light'))
+            light = float(self.request.get('light'))
             sensordata.temp = temp
             sensordata.light = light
             sensordata.lastupdate = datetime.datetime.now()
@@ -63,7 +53,7 @@ class MainPage(webapp2.RequestHandler):
                 'listToRowData': listToRowData(sense.list),
                 'temp': str(sense.temp),
                 'timeSinceLastMovement': sense.lastmovement,
-                'datetime': datetime.datetime.now(),
+                'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
         }
 
 
@@ -86,7 +76,7 @@ class MainPageUser(webapp2.RequestHandler):
                 'listToRowData': listToRowData(sense.list),
                 'temp': str(sense.temp),
                 'timeSinceLastMovement': sense.lastmovement,
-                'datetime': datetime.datetime.now(),
+                'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
             }
             template = jinja_environment.get_template('frontuser.html')
             self.response.out.write(template.render(template_values))
@@ -107,7 +97,7 @@ class Temperature(webapp2.RequestHandler):
             'listToRowData': listToRowData(sense.list),
             'temp': str(sense.temp),
             'timeSinceLastMovement': sense.lastmovement,
-            'datetime': datetime.datetime.now(),
+            'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
             }
         template = jinja_environment.get_template('temperature.html')
         self.response.out.write(template.render(template_values))
@@ -124,7 +114,7 @@ class Light(webapp2.RequestHandler):
         template_values = {
             'listToRowData': listToRowData(sense.list),
             'light': str(sense.light),
-            'datetime': datetime.datetime.now(),
+            'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
             #'user_mail': users.get_current_user().email(),
             #'logout': users.create_logout_url(self.request.host_url),
         }
@@ -172,15 +162,15 @@ class Settings(webapp2.RequestHandler):
 
     def get(self):
         user = users.get_current_user()
-        if user:  # signed in already
+        #if user:  # signed in already
             template_values = {
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
             }
             template = jinja_environment.get_template('settings.html')
             self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(self.request.host_url)
+       # else:
+        #    self.redirect(self.request.host_url)
 
       
 app = webapp2.WSGIApplication([('/', MainPage),
@@ -230,8 +220,3 @@ def generateDHMString(difference):
             ret = str(difference.days) + str1 + " and " + ret
     return ret
  
-def main():
-    run_wsgi_app(application)
- 
-if __name__ == '__main__':
-    main()
