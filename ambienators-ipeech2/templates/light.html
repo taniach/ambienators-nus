@@ -55,8 +55,10 @@
 
 
       <div class="container">
-        <p class="current-reading">Current light intensity: <span>{{ light }}</span><span> %</span></p>
-        <p class="date-time">At {{ datetime }} </p>
+        <p class="current-reading">Current light intensity: <br><span>{{ light }}</span><span> %</span></p>
+        
+        <p class="date-time">Last Updated: {{ datetimeLastUpdate }} </p>
+        <p class="date-time">Current Timestamp: {{ datetime }} </p>
         <div class ="view-history">
           <a class="btn btn-primary" href="/history">View History</a>
         </div>
