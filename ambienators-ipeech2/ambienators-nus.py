@@ -56,20 +56,8 @@ class MainPage(webapp2.RequestHandler):
   def get(self):
         sense = ArduinoSensorData.get_or_insert('1')
         timeSinceLastMovement = generateDHMString(datetime.datetime.now() - sense.lastmovement)
-        
-        # begin new 
-
-        template_values = {
-                'listToRowData': listToRowData(sense.list),
-                'temp': str(sense.temp),
-                'timeSinceLastMovement': sense.lastmovement,
-                'datetime': datetime.datetime.now(),
-        }
-
-
         template = jinja_environment.get_template('front.html')
-
-        self.response.write(template.render(template_values))
+        self.response.write(template.render())
 
 
 class MainPageUser(webapp2.RequestHandler):
@@ -83,10 +71,6 @@ class MainPageUser(webapp2.RequestHandler):
             template_values = {
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
-                'listToRowData': listToRowData(sense.list),
-                'temp': str(sense.temp),
-                'timeSinceLastMovement': sense.lastmovement,
-                'datetime': datetime.datetime.now(),
             }
             template = jinja_environment.get_template('frontuser.html')
             self.response.out.write(template.render(template_values))
@@ -108,6 +92,7 @@ class Temperature(webapp2.RequestHandler):
             'temp': str(sense.temp),
             'timeSinceLastMovement': sense.lastmovement,
             'datetime': datetime.datetime.now(),
+            'datetimeLastUpdate': str(sense.lastupdate),
             }
         template = jinja_environment.get_template('temperature.html')
         self.response.out.write(template.render(template_values))
@@ -125,6 +110,7 @@ class Light(webapp2.RequestHandler):
             'listToRowData': listToRowData(sense.list),
             'light': str(sense.light),
             'datetime': datetime.datetime.now(),
+            'datetimeLastUpdate': str(sense.lastupdate),
             #'user_mail': users.get_current_user().email(),
             #'logout': users.create_logout_url(self.request.host_url),
         }
