@@ -54,8 +54,6 @@ class ArduinoPost(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
   """ Handler for the front page."""
   def get(self):
-        sense = ArduinoSensorData.get_or_insert('1')
-        timeSinceLastMovement = generateDHMString(datetime.datetime.now() - sense.lastmovement)
         template = jinja_environment.get_template('front.html')
         self.response.write(template.render())
 
@@ -64,8 +62,6 @@ class MainPageUser(webapp2.RequestHandler):
     # Front page for those logged in
 
     def get(self):
-        sense = ArduinoSensorData.get_or_insert('1')
-        timeSinceLastMovement = generateDHMString(datetime.datetime.now() - sense.lastmovement)
         user = users.get_current_user()
         if user:  # signed in already
             template_values = {
