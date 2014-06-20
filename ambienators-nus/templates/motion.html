@@ -1,14 +1,11 @@
-<!-- Light -->
+<!-- Motion -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartAmbient - Light</title>
-  <link rel="apple-touch-icon" href="/images/iosicon.png">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
-  <meta http-equiv="refresh" content="30" >
+  <title>SmartAmbient - Motion</title>
 
   <!-- Bootstrap Simplex-->
   <link href="../simplex/bootstrap.min.css" rel="stylesheet">
@@ -41,8 +38,8 @@
           <ul class="nav navbar-nav">
             <li><a href="/mainuser">Home</a></li>
             <li><a href="/temperature">Temperature</a></li>
-            <li class="active"><a href="">Light</a></li>
-            <li><a href="/motion">Motion</a></li>
+            <li><a href="/light">Light</a></li>
+            <li class="active"><a href="">Motion</a></li>
             <li><a href="/history">History</a></li>
             <li><a href="/settings">Settings</a></li>
           </ul>
@@ -58,11 +55,7 @@
 
 
       <div class="container">
-        <p class="current-reading">Current light intensity: <br><span>{{ light }}</span><span> %</span></p>
-        
-        <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
-        <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
-        <br>
+        <p class="current-reading">Motion <span>not </span>present</p>
         <div class ="view-history">
           <a class="btn btn-primary" href="/history">View History</a>
         </div>

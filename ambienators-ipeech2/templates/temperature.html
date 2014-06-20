@@ -22,7 +22,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-    
+
 
 
 
@@ -64,11 +64,11 @@
 
       <div class="container">
         <p class="current-reading">Current temperature:<br><span>{{ temp }} </span>&deg;<span>C</span></p>
-        <p class="date-time">Last Updated: {{ datetimeLastUpdate }} </p>
-        <p class="date-time">Current Timestamp: {{ datetime }} </p>
-        
-        
 
+        
+        <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
+        <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
+        <br/>
         <div class ="view-history">
           <a class="btn btn-primary" href="/history">View History</a>
           <!--<p>Movement detected {{ timeSinceLastMovement }}</p>-->

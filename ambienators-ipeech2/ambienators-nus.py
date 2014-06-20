@@ -54,8 +54,6 @@ class ArduinoPost(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
   """ Handler for the front page."""
   def get(self):
-        sense = ArduinoSensorData.get_or_insert('1')
-        timeSinceLastMovement = generateDHMString(datetime.datetime.now() - sense.lastmovement)
         template = jinja_environment.get_template('front.html')
         self.response.write(template.render())
 
@@ -64,8 +62,6 @@ class MainPageUser(webapp2.RequestHandler):
     # Front page for those logged in
 
     def get(self):
-        sense = ArduinoSensorData.get_or_insert('1')
-        timeSinceLastMovement = generateDHMString(datetime.datetime.now() - sense.lastmovement)
         user = users.get_current_user()
         if user:  # signed in already
             template_values = {
@@ -91,8 +87,8 @@ class Temperature(webapp2.RequestHandler):
             'listToRowData': listToRowData(sense.list),
             'temp': str(sense.temp),
             'timeSinceLastMovement': sense.lastmovement,
-            'datetime': datetime.datetime.now(),
-            'datetimeLastUpdate': str(sense.lastupdate),
+            'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
+            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M %p")),
             }
         template = jinja_environment.get_template('temperature.html')
         self.response.out.write(template.render(template_values))
@@ -109,8 +105,8 @@ class Light(webapp2.RequestHandler):
         template_values = {
             'listToRowData': listToRowData(sense.list),
             'light': str(sense.light),
-            'datetime': datetime.datetime.now(),
-            'datetimeLastUpdate': str(sense.lastupdate),
+            'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
+            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M %p")),
             #'user_mail': users.get_current_user().email(),
             #'logout': users.create_logout_url(self.request.host_url),
         }
