@@ -40,10 +40,10 @@ class ArduinoPost(webapp2.RequestHandler):
             light = int(self.request.get('light'))
             sensordata.temp = temp
             sensordata.light = light
-            sensordata.lastupdate = datetime.datetime.now()
+            sensordata.lastupdate = datetime.datetime.now() + datetime.timedelta(hours=8)
             if movement == 1:
-                sensordata.lastmovement = datetime.datetime.now()
-            sensordata.list.append(datetime.datetime.now().strftime("%Y,%m,%d,%H,%M,%S"))
+                sensordata.lastmovement = datetime.datetime.now() + datetime.timedelta(hours=8)
+            sensordata.list.append((datetime.datetime.now()+ datetime.timedelta(hours=8)).strftime("%Y,%m,%d,%H,%M,%S"))
             sensordata.list.append(str(temp))
             sensordata.list.append(str(moves))
             sensordata.put()
@@ -78,7 +78,7 @@ class Temperature(webapp2.RequestHandler):
 
     def get(self):
         sense = ArduinoSensorData.get_or_insert('1')
-        timeSinceLastMovement = generateDHMString(datetime.datetime.now() - sense.lastmovement)
+        
         #user = users.get_current_user()
         #if user:  # signed in already
         template_values = {
@@ -87,8 +87,8 @@ class Temperature(webapp2.RequestHandler):
             'listToRowData': listToRowData(sense.list),
             'temp': str(sense.temp),
             'timeSinceLastMovement': sense.lastmovement,
-            'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
-            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M %p")),
+            'datetime': (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime("%d %b %y, %I.%M.%S %p"),
+            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M.%S %p")),
             }
         template = jinja_environment.get_template('temperature.html')
         self.response.out.write(template.render(template_values))
@@ -105,8 +105,8 @@ class Light(webapp2.RequestHandler):
         template_values = {
             'listToRowData': listToRowData(sense.list),
             'light': str(sense.light),
-            'datetime': datetime.datetime.now().strftime("%d %b %y, %I.%M %p"),
-            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M %p")),
+            'datetime': (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime("%d %b %y, %I.%M.%S %p"),
+            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M.%S %p")),
             #'user_mail': users.get_current_user().email(),
             #'logout': users.create_logout_url(self.request.host_url),
         }
