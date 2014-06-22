@@ -58,7 +58,7 @@
 
 
       <div class="container">
-        <p class="current-reading">Motion <span>not </span>present</p>
+        <p class="current-reading">Motion <span>{{ motionStatusString }}</span></p>
                 <p class="current-reading">Motion last detected at: <br><span>{{ datetimeLastMovement }}</span></p>
         <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
         <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
