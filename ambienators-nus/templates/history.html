@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SmartAmbient - History</title>
-
+  <link rel="apple-touch-icon" href="images/iosicon.png">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
   <!-- Bootstrap Simplex-->
   <link href="../simplex/bootstrap.min.css" rel="stylesheet">
   <!-- Stylesheet -->
@@ -18,6 +19,26 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+     <script type='text/javascript' src='http://www.google.com/jsapi'></script>
+                <script type='text/javascript'>
+                    google.load('visualization', '1', {'packages':['annotatedtimeline']});
+                    google.setOnLoadCallback(drawChart);
+                function drawChart()
+                {
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('datetime', 'Date/Time');
+                    data.addColumn('number', 'Temperature');
+                    data.addColumn('number', 'Movement');
+
+                    data.addRows([
+{{ listToRowData }}
+                    ]);
+ 
+                    var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
+                    chart.draw(data, {displayAnnotations: true});
+                }
+                </script>
+
     </head>
 
     <body>
@@ -55,7 +76,7 @@
 
 
       <div class="container">
-
+      <div id='chart_div' style='width: 700px; height: 240px;'></div>
         <table class="table table-striped table-hover history">
 
           <thead>
