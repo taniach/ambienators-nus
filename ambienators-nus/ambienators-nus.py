@@ -29,6 +29,7 @@ class ArduinoSensorData(db.Model):
     list = db.StringListProperty()
     lastmovement = db.DateTimeProperty(auto_now_add=True)
     lastupdate = db.DateTimeProperty(auto_now_add=True)
+
  
 class ArduinoPost(webapp2.RequestHandler):
     def post(self):
@@ -43,14 +44,17 @@ class ArduinoPost(webapp2.RequestHandler):
             sensordata.light = light
             sensordata.lastupdate = datetime.datetime.now() + datetime.timedelta(hours=8)
             sensordata.movement = movement
+            
             if movement == 1:
                 sensordata.lastmovement = datetime.datetime.now() + datetime.timedelta(hours=8)
+                
             sensordata.list.append((datetime.datetime.now()+ datetime.timedelta(hours=8)).strftime("%Y,%m,%d,%H,%M,%S"))
             sensordata.list.append(str(temp))
             sensordata.list.append(str(moves))
             sensordata.put()
         except ValueError:
             pass
+
 
 
 class MainPage(webapp2.RequestHandler):
@@ -120,14 +124,21 @@ class Light(webapp2.RequestHandler):
 class Motion(webapp2.RequestHandler):
     # Motion
 
+
+
     def get(self):
         #user = users.get_current_user()
         #if user:  # signed in already
         sense = ArduinoSensorData.get_or_insert('1')
+        if (sense.movement):
+            motionStatusString = "present"
+        else: 
+            motionStatusString = "not present"
         template_values = {
             'datetimeLastMovement': str(sense.lastmovement.strftime("%d %b %y, %I.%M.%S %p")),
             'datetime': (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime("%d %b %y, %I.%M.%S %p"),
             'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M.%S %p")),
+            'motionStatusString': motionStatusString,
             #'user_mail': users.get_current_user().email(),
             #'logout': users.create_logout_url(self.request.host_url),
         }
