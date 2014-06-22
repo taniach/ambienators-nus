@@ -204,7 +204,7 @@ def generateDHMString(difference):
         else:
             andVal=True
             ret = str(hours) + str1 + " and " + ret
-    if difference.days !=0:
+    if difference.days != 0:
         str1 = " day" if difference.days == 1 else " days"
         if andVal:
             ret = str(difference.days) + str1 + ", " + ret
