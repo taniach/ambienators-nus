@@ -25,6 +25,7 @@ jinja_environment = jinja2.Environment(
 class ArduinoSensorData(db.Model):
     temp = db.IntegerProperty()
     light = db.IntegerProperty()
+    movement = db.IntegerProperty()
     list = db.StringListProperty()
     lastmovement = db.DateTimeProperty(auto_now_add=True)
     lastupdate = db.DateTimeProperty(auto_now_add=True)
@@ -41,6 +42,7 @@ class ArduinoPost(webapp2.RequestHandler):
             sensordata.temp = temp
             sensordata.light = light
             sensordata.lastupdate = datetime.datetime.now() + datetime.timedelta(hours=8)
+            sensordata.movement = movement
             if movement == 1:
                 sensordata.lastmovement = datetime.datetime.now() + datetime.timedelta(hours=8)
             sensordata.list.append((datetime.datetime.now()+ datetime.timedelta(hours=8)).strftime("%Y,%m,%d,%H,%M,%S"))
@@ -121,7 +123,11 @@ class Motion(webapp2.RequestHandler):
     def get(self):
         #user = users.get_current_user()
         #if user:  # signed in already
+        sense = ArduinoSensorData.get_or_insert('1')
         template_values = {
+            'datetimeLastMovement': str(sense.lastmovement.strftime("%d %b %y, %I.%M.%S %p")),
+            'datetime': (datetime.datetime.now() + datetime.timedelta(hours=8)).strftime("%d %b %y, %I.%M.%S %p"),
+            'datetimeLastUpdate': str(sense.lastupdate.strftime("%d %b %y, %I.%M.%S %p")),
             #'user_mail': users.get_current_user().email(),
             #'logout': users.create_logout_url(self.request.host_url),
         }
