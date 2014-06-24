@@ -48,7 +48,7 @@ class ArduinoPost(webapp2.RequestHandler):
             if movement == 1:
                 sensordata.lastmovement = datetime.datetime.now() + datetime.timedelta(hours=8)
                 
-            sensordata.list.append((datetime.datetime.now()+ datetime.timedelta(hours=8)).strftime("%Y,%m,%d,%H,%M,%S"))
+            sensordata.list.append((datetime.datetime.now()+ datetime.timedelta(hours=8)).strftime("%d %b %y, %I.%M.%S %p"))
             sensordata.list.append(str(temp))
             sensordata.list.append(str(moves))
             sensordata.put()
