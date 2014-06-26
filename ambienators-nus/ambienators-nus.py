@@ -124,8 +124,6 @@ class Light(webapp2.RequestHandler):
 class Motion(webapp2.RequestHandler):
     # Motion
 
-
-
     def get(self):
         #user = users.get_current_user()
         #if user:  # signed in already
@@ -170,16 +168,16 @@ class Settings(webapp2.RequestHandler):
     # Settings
 
     def get(self):
-        user = users.get_current_user()
-        if user:  # signed in already
+        #user = users.get_current_user()
+        #if user:  # signed in already
             template_values = {
-                'user_mail': users.get_current_user().email(),
-                'logout': users.create_logout_url(self.request.host_url),
+        #        'user_mail': users.get_current_user().email(),
+        #        'logout': users.create_logout_url(self.request.host_url),
             }
             template = jinja_environment.get_template('settings.html')
             self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(self.request.host_url)
+        #else:
+        #    self.redirect(self.request.host_url)
 
       
 app = webapp2.WSGIApplication([('/', MainPage),
