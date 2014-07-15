@@ -62,3 +62,17 @@ hr {
 	width: 10px;
 	padding-top: 0.9%;
 }
+
+ul li.active {
+	font-size: 22px;
+	background-color: white;
+}
+
+ul li {
+	font-size: 20px;
+	font-family: 'Berlin Sans FB', sans-serif;
+}
+
+.mylink {
+	color: red;
+}
