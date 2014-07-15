@@ -70,7 +70,7 @@ ul li.active {
 
 ul li {
 	font-size: 16px;
-	font-family: 'Arial Rounded MT Bold', sans-serif;
+	font-family: 'Georgia', sans-serif;
 }
 
 .mylink {
@@ -79,4 +79,8 @@ ul li {
 
 .btn, .date-time {
 	font-size: 1.2em;
+}
+
+.btn-lg {
+	font-size: 0.9em;
 }

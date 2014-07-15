@@ -65,7 +65,6 @@ class ArduinoPost(webapp2.RequestHandler):
         try:
             temp = int(self.request.get('temp'))
             movement = int(self.request.get('movement'))
-            moves = int(self.request.get('moves'))
             light = int(self.request.get('light'))
             sensordata.temp = temp
             sensordata.light = light
@@ -76,6 +75,8 @@ class ArduinoPost(webapp2.RequestHandler):
                 sensordata.lastmovement = datetime.datetime.now()
 
             sensordata.put()
+            params = urllib.urlencode({'username':users.get_current_user().nickname()})
+            self.redirect('/sensors?' + params)
 
         except ValueError:
             pass
@@ -126,9 +127,11 @@ class MainPageUser(webapp2.RequestHandler):
             person.put()
 
         if user:  # signed in already
+            params = urllib.urlencode({'username':users.get_current_user().nickname()})
             template_values = {
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
+                'nickname': users.get_current_user().nickname(),
             }
             template = jinja_environment.get_template('frontuser.html')
             self.response.out.write(template.render(template_values))
@@ -158,6 +161,7 @@ class Sensors(webapp2.RequestHandler):
                 'datetimeLastUpdate': (sense.lastupdate + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
                 'motionStatusString': motionStatusString,
                 'user_mail': users.get_current_user().email(),
+                'nickname': users.get_current_user().nickname(),
                 'logout': users.create_logout_url(self.request.host_url),
             }
             template = jinja_environment.get_template('sensors.html')
@@ -176,6 +180,7 @@ class History(webapp2.RequestHandler):
         if user:  # signed in already
             template_values = {
                 'user_mail': users.get_current_user().email(),
+                'nickname': users.get_current_user().nickname(),
                 'logout': users.create_logout_url(self.request.host_url),
                 'person': person,
                 'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
@@ -199,6 +204,7 @@ class Settings(webapp2.RequestHandler):
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
                 'person': person,
+                'nickname': users.get_current_user().nickname(),
             }
             template = jinja_environment.get_template('settings.html')
             self.response.out.write(template.render(template_values))
@@ -241,6 +247,7 @@ class Settings(webapp2.RequestHandler):
     
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/mainuser', MainPageUser),
+                               ('/arduinopost', ArduinoPost),
                                ('/sensors', Sensors),
                                ('/history', History),
                                ('/settings', Settings)],

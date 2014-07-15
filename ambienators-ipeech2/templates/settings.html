@@ -38,9 +38,9 @@
 
         <div class="navbar-collapse collapse navbar-inverse-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/mainuser">Home</a></li>
-            <li><a href="/sensors">Sensors</a></li>
-            <li><a href="/history">History</a></li>
+            <li><a href="/mainuser?username={{ nickname }}">Home</a></li>
+            <li><a href="/sensors?username={{ nickname }}">Sensors</a></li>
+            <li><a href="/history?username={{ nickname }}">History</a></li>
             <li class="active"><a href=""><span class="mylink">Settings</span></a></li>
           </ul>
           
@@ -57,7 +57,7 @@
       <div class="container">
         <div class="extra-space"></div>
 
-        <form class="form-horizontal" action="/settings" method="post">
+        <form class="form-horizontal" action="/settings?username={{ nickname }}" method="post">
           <fieldset>
 
             <legend>Temperature</legend>

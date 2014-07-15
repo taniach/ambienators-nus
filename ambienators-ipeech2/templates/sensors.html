@@ -40,10 +40,10 @@
 
         <div class="navbar-collapse collapse navbar-inverse-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/mainuser">Home</a></li>
+            <li><a href="/mainuser?username={{ nickname }}">Home</a></li>
             <li class="active"><a href=""><span class="mylink">Sensors</span></a></li>
-            <li><a href="/history">History</a></li>
-            <li><a href="/settings">Settings</a></li>
+            <li><a href="/history?username={{ nickname }}">History</a></li>
+            <li><a href="/settings?username={{ nickname }}">Settings</a></li>
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
@@ -85,6 +85,13 @@
           <a class="btn btn-primary" href="/history">View History</a>
         </div>
         <hr/>
+<!--
+        <form action="/arduinopost?username={{ nickname }}" method="post">
+          Temperature:<input name="temp" type="number">
+          Light %:<input name="light" type="number">
+          Motion(0/1):<input name="movement" type="number">
+          <input type="submit" value="submit">
+        </form>-->
 
         <footer>
           <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
