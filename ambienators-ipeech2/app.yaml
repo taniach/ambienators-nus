@@ -6,10 +6,6 @@ threadsafe: true
 
 handlers:
 
-- url: /favicon.ico
-  static_files: images/favicon.ico
-  upload: images/favicon.ico
-
 - url: /stylesheets
   static_dir: stylesheets
 
@@ -19,17 +15,17 @@ handlers:
 - url: /scripts
   static_dir: scripts
 
+- url: /simplex
+  static_dir: simplex
+
 # Twitter Bootstrap
 - url: /bootstrap
   static_dir: bootstrap
 
-- url: /simplex
-  static_dir: simplex
-
-- url: /.*
+- url: /
   script: ambienators-nus.app
 
-- url: /templates
+- url: /.*
   script: ambienators-nus.app
   login: required
 

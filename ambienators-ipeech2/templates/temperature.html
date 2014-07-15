@@ -1,26 +1,29 @@
-<!-- Front page before login -->
+<!-- Temperature -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartAmbient - Home</title>
+  <title>SmartAmbient - Temperature</title>
   <!-- Bootstrap Simplex-->
   <link href="../simplex/bootstrap.min.css" rel="stylesheet">
   <!-- Stylesheet -->
   <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
-
   <link rel="apple-touch-icon" href="../images/iosicon.png">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+  <meta http-equiv="refresh" content="30" >
+
+
   
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-    
+
 
 
 
@@ -42,8 +45,8 @@
 
         <div class="navbar-collapse collapse navbar-inverse-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="">Home</a></li>
-            <li><a href="/temperature">Temperature</a></li>
+            <li><a href="/mainuser">Home</a></li>
+            <li class="active"><a href="">Temperature</a></li>
             <li><a href="/light">Light</a></li>
             <li><a href="/motion">Motion</a></li>
             <li><a href="/history">History</a></li>
@@ -51,53 +54,40 @@
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/mainuser">Login</a></li>
+            <li><a>{{ user_mail }}</a></li>
+            <li><a href="{{ logout }}">Logout</a></li>
           </ul>
 
         </div>
 
       </div>
 
-      <div class="jumbotron">
-        <h1>Welcome!</h1>
-        <p>SmartAmbient Sensor system is made for YOU - the manager of a workplace, school, or office or anyone who wants to keep track of environmental data. Find out when a space is used most and whether it is heated and lit effectively. No more worrying about wasting electricity, now you can nail the culprits quickly and save your wallet!
-        </p>
-        
-        <br/>             
-
-                
-        <p><a class="btn btn-primary btn-lg" href="/mainuser">Login Now!</a></p>
-      </div>
 
       <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-
-          <div class="col-md-4">
-            <h2>Get real-time data and history</h2>
-            <p>The SmartAmbient Sensor System operates on an arduino, which requires very little power, as compared to competing sensor products. You can get real time information about temperature, light intensity and presence of motion and view current data and history. 
-            </p>
-          </div>
-
-          <div class="col-md-4">
-            <h2>Convenient notification system</h2>
-            <p>You can choose to receive notifications either for every time interval (e.g every 3 hours), or for customised parameters, such as alerts when the temperature falls below 22&deg;C. </p>
-          </div>
-
-          <div class="col-md-4">
-            <h2>Access from anywhere you want</h2>
-            <p>Any device, including your Mac, PC, tablet, iPhone, Android, or even your Windows phone, can be used to access sensor data and history, from anywhere in the world!</p>
-          </div>
-
-        </div>
+        <p class="current-reading">Current temperature:<br>
+          {% if person.temperature_unit == 'celsius' %}
+          <span>{{ temp }} </span>&deg;C</p>
+          {% elif person.temperature_unit == 'fahrenheit' %}
+          <span>{{ temp }} </span>&deg;F</p>
+          {% else %}
+          <span>{{ temp }} </span>K</p>
+          {% endif %}
         
+        <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
+        <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
+        <br/>
+        <div class ="view-history">
+          <a class="btn btn-primary" href="/history">View History</a>
+          <!--<p>Unit: {{ unit }}</p>-->
+        </div>
         <hr/>
 
         <footer>
           <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
         </footer>
-        
+
       </div>
+
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

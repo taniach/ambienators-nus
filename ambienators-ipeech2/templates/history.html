@@ -82,6 +82,7 @@
 
           <thead>
             <tr>
+              <th>Index</th>
               <th>Date/Time</th>
               <th>Temperature</th>
               <th>Light intensity</th>
@@ -90,56 +91,17 @@
           </thead>
 
           <tbody>
-
+            {% for x in range(person.num_readings) %}
+            {% set outer_loop = loop %}
             <tr>
-              <td>1</td>
+              <td>{{ outer_loop.index }}</td>
+              <td>{{ datetime }}</td>
               <td>Column content</td>
               <td>Column content</td>
               <td>Column content</td>
             </tr>
-
-            <tr>
-              <td>2</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
-            </tr>
-
-            <tr>
-              <td>5</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
-            </tr>
-
-            <tr>
-              <td>6</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
-            </tr>
-
-            <tr>
-              <td>7</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
-            </tr>
-
+            {% endfor %}
+            
           </tbody>
         </table> 
 

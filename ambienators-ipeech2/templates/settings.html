@@ -1,0 +1,372 @@
+<!-- Settings -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartAmbient - Settings</title>
+  <!-- Bootstrap Simplex-->
+  <link href="../simplex/bootstrap.min.css" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
+  <link rel="apple-touch-icon" href="../images/iosicon.png">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+  
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+
+    <body>
+
+      <!-- Top navbar -->
+      <div class="navbar navbar-inverse">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">SmartAmbient Sensor</a>
+        </div>
+
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/mainuser">Home</a></li>
+            <li><a href="/temperature">Temperature</a></li>
+            <li><a href="/light">Light</a></li>
+            <li><a href="/motion">Motion</a></li>
+            <li><a href="/history">History</a></li>
+            <li class="active"><a href="">Settings</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>{{ user_mail }}</a></li>
+            <li><a href="{{ logout }}">Logout</a></li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="container">
+        <div class="extra-space"></div>
+
+        <form class="form-horizontal" action="/settings" method="post">
+          <fieldset>
+
+            <legend>Temperature</legend>
+
+            <div class="form-group">
+              <label class="col-lg-1 control-label"></label>
+              <div class="col-lg-10">
+                <br/>
+
+                <label for="select" class="col-lg-1 control-label">Unit</label>
+                <!-- Units -->
+                <div class="col-lg-2">
+                  <select class="form-control" id="select-temp-unit" name="select-temp-unit">
+                    <!--
+                    {% if person.temperature_unit == 'celsius' %}
+                    <option value="celsius" selected="selected">&deg;C</option>
+                    <option value="fahrenheit">&deg;F</option>
+                    <option value="kelvin">K</option>
+                    {% elif person.temperature_unit == 'fahrenheit' %}
+                    <option value="celsius">&deg;C</option>
+                    <option value="fahrenheit" selected="selected">&deg;F</option>
+                    <option value="kelvin">K</option>
+                    {% else %}
+                    <option value="celsius">&deg;C</option>
+                    <option value="fahrenheit">&deg;F</option>
+                    <option value="kelvin" selected="selected">K</option>
+                    {% endif %} -->
+                    <option value="celsius" {% if person.temperature_unit == 'celsius' %} selected="selected" {% endif %}>&deg;C</option>
+                    <option value="fahrenheit" {% if person.temperature_unit == 'fahrenheit' %} selected="selected" {% endif %}>&deg;F</option>
+                    <option value="kelvin" {% if person.temperature_unit == 'kelvin' %} selected="selected" {% endif %}>K</option>
+                  </select>
+                </div>
+                <br/>
+
+              </div>
+            </div>
+
+            <div class="extra-space"></div>
+
+          </fieldset>
+          <!-- End temperature settings -->
+
+          <fieldset>
+
+            <legend>Date and Time</legend>
+
+            <div class="form-group"><br/>
+              <label class="col-lg-2 control-label">Timezone</label>
+              <div class="col-lg-10">
+                
+
+                <label for="select" class="col-lg-1 control-label">UTC</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="0.25" min="-12.00" max="14.00" class="form-control" id="input-time-zone" name="input-time-zone" placeholder="0.00" value={{ person.time_zone }}>
+                </div>
+                <br/>
+                <br/>
+              </div>
+            </div>
+            <div class="extra-space"></div>
+
+          </fieldset>
+
+
+          <fieldset>
+
+            <legend>Notifications</legend>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">How should I be notified?</label>
+              <div class="col-lg-10">
+
+                <!-- By time -->
+
+                <!-- Time radio button -->
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="notify-type" id="optionsRadios1" value="by-time" {% if 'by-time' in person.notify_type %} checked {% endif %}>
+                    <span class="radio-option text-primary">By time</span>
+                  </label>
+                </div>
+                <div class="extra-space2"></div>
+
+                <!-- Time options -->
+                
+                <label for="select" class="col-lg-1 control-label">Every</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="1" min="1" class="form-control" id="notify-time-value" name="notify-time-value" value={{ person.notify_time_value }} placeholder="30">
+                </div>
+                <!-- Units -->
+                <div class="col-lg-2">
+                  <select class="form-control" id="notify-time-unit" name="notify-time-unit">
+                    <option value="minutes" {% if person.notify_time_unit == 'minutes' %} selected="selected" {% endif %}>minutes</option>
+                    <option value="hours" {% if person.notify_time_unit == 'hours' %} selected="selected" {% endif %}>hours</option>
+                    <option value="days" {% if person.notify_time_unit == 'days' %} selected="selected" {% endif %}>days</option>
+                    <option value="weeks" {% if person.notify_time_unit == 'weeks' %} selected="selected" {% endif %}>weeks</option>
+                    <option value="months" {% if person.notify_time_unit == 'months' %} selected="selected" {% endif %}>months</option>
+                  </select>
+                </div>
+                <br/> 
+                <div class="extra-space"></div>
+                <div class="extra-space"></div>
+
+                <!-- By parameters -->
+
+                <!-- Parameter radio button -->
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="notify-type" id="optionsRadios2" value="by-parameters" {% if 'by-parameters' in person.notify_type %} checked {% endif %}>
+                    <span class="radio-option text-primary">By parameters</span>
+                  </label>
+                </div>
+                <div class="extra-space"></div>
+
+                <!-- Parameter options -->
+
+                <!-- Temperature -->
+
+                <div class="form-group">
+                  <label class="col-lg-1 box">
+                    <input type="checkbox" name="parameter" value="by-temp" id="tbox" {% if 'by-temp' in person.notify_parameters %} checked {% endif %}>
+                  </label>
+                  <label for="select" class="col-lg-2 control-label">Temperature</label>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="above-below-temp" name="above-below-temp">
+                      <option value="above" {% if person.notify_temperature_abe == 'above' %} selected="selected" {% endif %}>above</option>
+                      <option value="below" {% if person.notify_temperature_abe == 'below' %} selected="selected" {% endif %}>below</option>
+                      <option value="exactly" {% if person.notify_temperature_abe == 'exactly' %} selected="selected" {% endif %}>exactly</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-2">
+                    <input type="number" step="1" class="form-control" id="notify-temp-val" name="notify-temp-val" value={{ person.notify_temperature_value }} >
+                  </div>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="notify-temp-unit" name="notify-temp-unit">
+                      <option value="celsius" {% if person.notify_temperature_unit == 'celsius' %} selected="selected" {% endif %}>&deg;C</option>
+                      <option value="fahrenheit" {% if person.notify_temperature_unit == 'fahrenheit' %} selected="selected" {% endif %}>&deg;F</option>
+                      <option value="kelvin" {% if person.notify_temperature_unit == 'kelvin' %} selected="selected" {% endif %}>K</option>
+                    </select>
+                  </div>
+
+                  <br/>
+                  
+                </div> <!-- End temperature -->
+
+                <!-- Light -->
+                <div class="form-group">
+                  <label class="col-lg-1 box">
+                    <input type="checkbox" name="parameter" value="by-light" id="lbox" {% if 'by-light' in person.notify_parameters %} checked {% endif %}>
+                  </label>
+                  <label for="select" class="col-lg-2 control-label">Light intensity</label>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="above-below-light" name="above-below-light">
+                      <option value="above" {% if person.notify_light_abe == 'above' %} selected="selected" {% endif %}>above</option>
+                      <option value="below" {% if person.notify_light_abe == 'below' %} selected="selected" {% endif %}>below</option>
+                      <option value="exactly" {% if person.notify_light_abe == 'exactly' %} selected="selected" {% endif %}>exactly</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-2">
+                    <input type="number" min="0" max="100" step="1" class="form-control" id="notify-light-val" name="notify-light-val" value={{ person.notify_light_value }}>
+                  </div>
+
+                  <div class="col-lg-2 percent">
+                    <span>%</span>
+                  </div>
+
+                  <br/>
+                  
+                </div> <!-- End light -->
+
+                <!-- Motion -->
+                <div class="form-group">
+                  <label class="col-lg-1 box">
+                    <input type="checkbox" name="parameter" value="by-motion" id="mbox" {% if 'by-motion' in person.notify_parameters %} checked {% endif %}>
+                  </label>
+
+                  <label for="select" class="col-lg-2 control-label">Motion</label>
+
+                  <div class="col-lg-2">
+                    <select class="form-control" id="present-notpresent" name="present-notpresent">
+                      <option value="present" {% if person.notify_motion == 'present' %} selected="selected" {% endif %}>present</option>
+                      <option value="notpresent" {% if person.notify_motion == 'notpresent' %} selected="selected" {% endif %}>not present</option>
+                    </select>
+                  </div>
+
+                  <br/>
+                  <div class="extra-space"></div>
+                </div> <!-- End motion -->
+
+              </div>
+            </div>
+
+          </fieldset>
+          <!-- End notification settings -->
+
+          <div class="extra-space2"></div>
+
+
+          <fieldset>
+
+            <legend>History</legend>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">How often should history be logged?</label>
+              <div class="col-lg-10">
+                <br/>
+
+                <label for="select" class="col-lg-1 control-label">Every</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="1" min="1" class="form-control" id="select-historylog-value" name="select-historylog-value" value={{ person.history_log_value }} placeholder="30">
+                </div>
+                <!-- Units -->
+                <div class="col-lg-2">
+                  <select class="form-control" id="select-historylog-unit" name="select-historylog-unit">
+                    <option value="minutes" {% if person.history_log_unit == 'minutes' %} selected="selected" {% endif %}>minutes</option>
+                    <option value="hours" {% if person.history_log_unit == 'hours' %} selected="selected" {% endif %}>hours</option>
+                    <option value="days" {% if person.history_log_unit == 'days' %} selected="selected" {% endif %}>days</option>
+                    <option value="weeks" {% if person.history_log_unit == 'weeks' %} selected="selected" {% endif %}>weeks</option>
+                    <option value="months" {% if person.history_log_unit == 'months' %} selected="selected" {% endif %}>months</option>
+                  </select>
+                </div>
+                <br/>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">How many readings to display?</label>
+              <div class="col-lg-10">
+                <br/>
+
+                <label for="select" class="col-lg-1 control-label">Last</label>
+                <!-- Number -->
+                <div class="col-lg-2">
+                  <input type="number" step="1" min="1" max="50" class="form-control" id="inputReadings" name="inputReadings" placeholder="5" value={{ person.num_readings }}>
+                </div>
+                <div class="col-lg-2 percent">
+                  <span>readings</span>
+                </div>
+                <br/>
+              </div>
+            </div>
+            <div class="extra-space"></div>
+
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary save">Save</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form> <!-- End history settings -->
+
+        <div class="extra-space"></div>
+        <div class="extra-space2"></div>
+        <hr/>
+
+        <footer>
+          <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
+        </footer>
+
+      </div>
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="../bootstrap/js/bootstrap.min.js"></script>
+    </body>
+    </html>
+
+    <!--
+      onclick=
+                    "document.getElementById('notify-time-value').disabled = true;
+                    document.getElementById('notify-time-unit').disabled = true;
+                    document.getElementById('above-below-temp').disabled = false;
+                    document.getElementById('notify-temp-val').disabled = false;
+                    document.getElementById('notify-temp-unit').disabled = false;
+                    document.getElementById('above-below-light').disabled = false;
+                    document.getElementById('notify-light-val').disabled = false;
+                    document.getElementById('present-notpresent').disabled = false;
+                    document.getElementById('tbox').disabled = false;
+                    document.getElementById('lbox').disabled = false;
+                    document.getElementById('mbox').disabled = false;
+                    "
+
+       onclick=
+                    "document.getElementById('notify-time-value').disabled = false;
+                    document.getElementById('notify-time-unit').disabled = false;
+                    document.getElementById('above-below-temp').disabled = true;
+                    document.getElementById('notify-temp-val').disabled = true;
+                    document.getElementById('notify-temp-unit').disabled = true;
+                    document.getElementById('above-below-light').disabled = true;
+                    document.getElementById('notify-light-val').disabled = true;
+                    document.getElementById('present-notpresent').disabled = true;
+                    document.getElementById('tbox').disabled = true;
+                    document.getElementById('lbox').disabled = true;
+                    document.getElementById('mbox').disabled = true;
+                    "
+    -->
