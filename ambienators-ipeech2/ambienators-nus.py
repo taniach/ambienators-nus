@@ -135,54 +135,8 @@ class MainPageUser(webapp2.RequestHandler):
         else:
             self.redirect(self.request.host_url)
 
-class Temperature(webapp2.RequestHandler):
-    # Temperature
 
-    def get(self):
-        
-        user = users.get_current_user()
-        parent = ndb.Key('Persons', users.get_current_user().email())
-        person = parent.get()
-
-        if user:  # signed in already
-            sense = ArduinoSensorData.get_or_insert('1')
-            template_values = {
-                'user_mail': users.get_current_user().email(),
-                'logout': users.create_logout_url(self.request.host_url),
-                'person': person,
-                'temp': str(sense.temp),
-                'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                'datetimeLastUpdate': (sense.lastupdate + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                }
-            template = jinja_environment.get_template('temperature.html')
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(self.request.host_url)
-
-class Light(webapp2.RequestHandler):
-    # Light intensity
-
-    def get(self):
-        user = users.get_current_user()
-        parent = ndb.Key('Persons', users.get_current_user().email())
-        person = parent.get()
-
-        if user:  # signed in already
-            sense = ArduinoSensorData.get_or_insert('1')
-            template_values = {
-                'light': str(sense.light),
-                'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                'datetimeLastUpdate': (sense.lastupdate + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                'user_mail': users.get_current_user().email(),
-                'logout': users.create_logout_url(self.request.host_url),
-            }
-            template = jinja_environment.get_template('light.html')
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(self.request.host_url)
-
-class Motion(webapp2.RequestHandler):
-    # Motion
+class Sensors(webapp2.RequestHandler):
 
     def get(self):
         user = users.get_current_user()
@@ -196,6 +150,9 @@ class Motion(webapp2.RequestHandler):
             else: 
                 motionStatusString = "not present"
             template_values = {
+                'person': person,
+                'temp': str(sense.temp),
+                'light': str(sense.light),
                 'datetimeLastMovement': (sense.lastmovement + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
                 'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
                 'datetimeLastUpdate': (sense.lastupdate + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
@@ -203,7 +160,7 @@ class Motion(webapp2.RequestHandler):
                 'user_mail': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
             }
-            template = jinja_environment.get_template('motion.html')
+            template = jinja_environment.get_template('sensors.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(self.request.host_url)
@@ -284,9 +241,7 @@ class Settings(webapp2.RequestHandler):
     
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/mainuser', MainPageUser),
-                               ('/temperature', Temperature),
-                               ('/light', Light),
-                               ('/motion', Motion),
+                               ('/sensors', Sensors),
                                ('/history', History),
                                ('/settings', Settings)],
                               debug=True)

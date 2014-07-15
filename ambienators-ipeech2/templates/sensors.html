@@ -1,19 +1,18 @@
-<!-- Temperature -->
+<!-- Sensors -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartAmbient - Temperature</title>
+  <title>SmartAmbient - Motion</title>
   <!-- Bootstrap Simplex-->
   <link href="../simplex/bootstrap.min.css" rel="stylesheet">
   <!-- Stylesheet -->
   <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
   <link rel="apple-touch-icon" href="../images/iosicon.png">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
-  <meta http-equiv="refresh" content="30" >
-
+  <meta http-equiv="refresh" content="10" >
 
   
 
@@ -23,10 +22,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-
-
-
-
     </head>
 
     <body>
@@ -46,9 +41,7 @@
         <div class="navbar-collapse collapse navbar-inverse-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/mainuser">Home</a></li>
-            <li class="active"><a href=""><span class="mylink">Temperature</span></a></li>
-            <li><a href="/light">Light</a></li>
-            <li><a href="/motion">Motion</a></li>
+            <li class="active"><a href=""><span class="mylink">Sensors</span></a></li>
             <li><a href="/history">History</a></li>
             <li><a href="/settings">Settings</a></li>
           </ul>
@@ -64,21 +57,32 @@
 
 
       <div class="container">
+
+        <!-- temperature -->
         <p class="current-reading">Current temperature:<br>
           {% if person.temperature_unit == 'celsius' %}
-          <span>{{ temp }} </span>&deg;C</p>
+          <span class="text-primary">{{ temp }} &deg;C</span></p>
           {% elif person.temperature_unit == 'fahrenheit' %}
-          <span>{{ temp }} </span>&deg;F</p>
+          <span class="text-primary">{{ temp }} &deg;F</span></p>
           {% else %}
-          <span>{{ temp }} </span>K</p>
+          <span class="text-primary">{{ temp }} K</span></p>
           {% endif %}
-        
+
+
+        <!-- light -->
+        <p class="current-reading">Current light intensity: <br><span class="text-primary">{{ light }} %</span></p>
+
+
+        <!-- motion -->
+        <p class="current-reading">Motion <span class="text-primary">{{ motionStatusString }}</span></p>
+                <p class="current-reading">Motion last detected at: <br><span>{{ datetimeLastMovement }}</span></p>
+
+
         <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
         <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
-        <br/>
+        <br>
         <div class ="view-history">
           <a class="btn btn-primary" href="/history">View History</a>
-          <!--<p>Unit: {{ unit }}</p>-->
         </div>
         <hr/>
 

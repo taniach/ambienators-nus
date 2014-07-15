@@ -64,15 +64,19 @@ hr {
 }
 
 ul li.active {
-	font-size: 22px;
+	font-size: 18px;
 	background-color: white;
 }
 
 ul li {
-	font-size: 20px;
-	font-family: 'Berlin Sans FB', sans-serif;
+	font-size: 16px;
+	font-family: 'Arial Rounded MT Bold', sans-serif;
 }
 
 .mylink {
 	color: red;
+}
+
+.btn, .date-time {
+	font-size: 1.2em;
 }
