@@ -57,53 +57,78 @@ class ArduinoSensorData(ndb.Model):
     lastmovement = ndb.DateTimeProperty(auto_now_add=True)
     lastupdate = ndb.DateTimeProperty(auto_now_add=True)
 
- 
+
+class ArduinoSensorDataCommon(ndb.Model):
+    temp = ndb.IntegerProperty()
+    light = ndb.IntegerProperty()
+    movement = ndb.IntegerProperty()
+    user_name = ndb.StringProperty()
+
 class ArduinoPost(webapp2.RequestHandler):
     def get(self):
+        # common, get from arduino, no parent
+        sensecommon = ArduinoSensorDataCommon()
+        sensecommon.temp = int(self.request.get('temp'))
+        sensecommon.movement = int(self.request.get('movement'))
+        sensecommon.light = int(self.request.get('light'))
+        sensecommon.user_name = self.request.get('username')
+        k1 = sensecommon.put()
+
+        # entity with user as a parent
         sensordata = ArduinoSensorData(parent=ndb.Key('Persons', users.get_current_user().email()))
 
         try:
-            username = self.request.get('username')
-            temp = int(self.request.get('temp'))
-            movement = int(self.request.get('movement'))
-            light = int(self.request.get('light'))
-            sensordata.temp = temp
-            sensordata.light = light
+            # copy data
+            sensordata.temp = sensecommon.temp
+            sensordata.light = sensecommon.light
             sensordata.lastupdate = datetime.datetime.now()
-            sensordata.movement = movement
+            sensordata.movement = sensecommon.movement
             
-            if movement == 1:
+            if sensecommon.movement == 1:
                 sensordata.lastmovement = datetime.datetime.now()
 
-            if username == users.get_current_user().nickname():
-                sensordata.put()
+            # if username in arduino request matches the current user nickname
+            if sensecommon.user_name == users.get_current_user().nickname():
+                k2 = sensordata.put()
 
             params = urllib.urlencode({'username':users.get_current_user().nickname()})
+            # for testing
+            #self.response.out.write("<html><body>"+str(k1)+" "+str(k2)+"</body></html>")
             self.redirect('/sensors?' + params)
 
         except ValueError:
             pass
 
     def post(self):
+        # common, get from arduino, no parent
+        sensecommon = ArduinoSensorDataCommon()
+        sensecommon.temp = int(self.request.get('temp'))
+        sensecommon.movement = int(self.request.get('movement'))
+        sensecommon.light = int(self.request.get('light'))
+        sensecommon.user_name = self.request.get('username')
+        k1 = sensecommon.put()
+
+
+        # entity with user as a parent
         sensordata = ArduinoSensorData(parent=ndb.Key('Persons', users.get_current_user().email()))
 
         try:
-            username = self.request.get('username')
-            temp = int(self.request.get('temp'))
-            movement = int(self.request.get('movement'))
-            light = int(self.request.get('light'))
-            sensordata.temp = temp
-            sensordata.light = light
+            # copy data
+            sensordata.temp = sensecommon.temp
+            sensordata.light = sensecommon.light
             sensordata.lastupdate = datetime.datetime.now()
-            sensordata.movement = movement
+            sensordata.movement = sensecommon.movement
             
-            if movement == 1:
+            if sensecommon.movement == 1:
                 sensordata.lastmovement = datetime.datetime.now()
 
-            if username == users.get_current_user().nickname():
-                sensordata.put()
+            # if username in arduino request matches the current user nickname
+            if sensecommon.user_name == users.get_current_user().nickname():
+                k2 = sensordata.put()
 
             params = urllib.urlencode({'username':users.get_current_user().nickname()})
+            # for testing
+            #self.response.out.write("<html><body>"+str(k1)+" "+str(k2)+"</body></html>")
             self.redirect('/sensors?' + params)
 
         except ValueError:
