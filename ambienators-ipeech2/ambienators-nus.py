@@ -59,10 +59,11 @@ class ArduinoSensorData(ndb.Model):
 
  
 class ArduinoPost(webapp2.RequestHandler):
-    def post(self):
-        sensordata = ArduinoSensorData.get_or_insert('1')
+    def get(self):
+        sensordata = ArduinoSensorData(parent=ndb.Key('Persons', users.get_current_user().email()))
 
         try:
+            username = self.request.get('username')
             temp = int(self.request.get('temp'))
             movement = int(self.request.get('movement'))
             light = int(self.request.get('light'))
@@ -74,12 +75,42 @@ class ArduinoPost(webapp2.RequestHandler):
             if movement == 1:
                 sensordata.lastmovement = datetime.datetime.now()
 
-            sensordata.put()
+            if username == users.get_current_user().nickname():
+                sensordata.put()
+
             params = urllib.urlencode({'username':users.get_current_user().nickname()})
             self.redirect('/sensors?' + params)
 
         except ValueError:
             pass
+
+    def post(self):
+        sensordata = ArduinoSensorData(parent=ndb.Key('Persons', users.get_current_user().email()))
+
+        try:
+            username = self.request.get('username')
+            temp = int(self.request.get('temp'))
+            movement = int(self.request.get('movement'))
+            light = int(self.request.get('light'))
+            sensordata.temp = temp
+            sensordata.light = light
+            sensordata.lastupdate = datetime.datetime.now()
+            sensordata.movement = movement
+            
+            if movement == 1:
+                sensordata.lastmovement = datetime.datetime.now()
+
+            if username == users.get_current_user().nickname():
+                sensordata.put()
+
+            params = urllib.urlencode({'username':users.get_current_user().nickname()})
+            self.redirect('/sensors?' + params)
+
+        except ValueError:
+            pass
+
+
+
 
 class MainPage(webapp2.RequestHandler):
   """ Handler for the front page."""
@@ -147,25 +178,40 @@ class Sensors(webapp2.RequestHandler):
         person = parent.get()
 
         if user:  # signed in already
-            sense = ArduinoSensorData.get_or_insert('1')
-            if (sense.movement):
-                motionStatusString = "present"
-            else: 
-                motionStatusString = "not present"
-            template_values = {
-                'person': person,
-                'temp': str(sense.temp),
-                'light': str(sense.light),
-                'datetimeLastMovement': (sense.lastmovement + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                'datetimeLastUpdate': (sense.lastupdate + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
-                'motionStatusString': motionStatusString,
-                'user_mail': users.get_current_user().email(),
-                'nickname': users.get_current_user().nickname(),
-                'logout': users.create_logout_url(self.request.host_url),
-            }
-            template = jinja_environment.get_template('sensors.html')
-            self.response.out.write(template.render(template_values))
+            sense = ndb.gql("SELECT * FROM ArduinoSensorData WHERE ANCESTOR IS :1 ORDER BY lastupdate DESC", parent).get()
+            
+            if sense:
+                if (sense.movement):
+                    motionStatusString = "present"
+                else: 
+                    motionStatusString = "not present"
+
+                template_values = {
+                    'person': person,
+                    'temp': str(sense.temp),
+                    'light': str(sense.light),
+                    'datetimeLastMovement': (sense.lastmovement + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
+                    'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
+                    'datetimeLastUpdate': (sense.lastupdate + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
+                    'motionStatusString': motionStatusString,
+                    'user_mail': users.get_current_user().email(),
+                    'nickname': users.get_current_user().nickname(),
+                    'logout': users.create_logout_url(self.request.host_url),
+                    'query_params': urllib.urlencode({'username': users.get_current_user().nickname(), 'temp': 40, 'light': 50, 'movement': 1}),
+                }
+                template = jinja_environment.get_template('sensors.html')
+                self.response.out.write(template.render(template_values))
+
+            else:
+                template_values = {
+                    'user_mail': users.get_current_user().email(),
+                    'nickname': users.get_current_user().nickname(),
+                    'logout': users.create_logout_url(self.request.host_url),
+                    'person': person,
+                    'query_params': urllib.urlencode({'username': users.get_current_user().nickname(), 'temp': 70, 'light': 80, 'movement': 0}),
+                }
+                template = jinja_environment.get_template('nodata.html')
+                self.response.write(template.render(template_values))
         else:
             self.redirect(self.request.host_url)
 

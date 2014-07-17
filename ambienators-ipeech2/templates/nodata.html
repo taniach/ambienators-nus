@@ -59,31 +59,7 @@
       <div class="container">
 
         <!-- temperature -->
-        <p class="current-reading">Current temperature:<br>
-          {% if person.temperature_unit == 'celsius' %}
-          <span class="text-primary">{{ temp }} &deg;C</span></p>
-          {% elif person.temperature_unit == 'fahrenheit' %}
-          <span class="text-primary">{{ temp }} &deg;F</span></p>
-          {% else %}
-          <span class="text-primary">{{ temp }} K</span></p>
-          {% endif %}
-
-
-        <!-- light -->
-        <p class="current-reading">Current light intensity: <br><span class="text-primary">{{ light }} %</span></p>
-
-
-        <!-- motion -->
-        <p class="current-reading">Motion <span class="text-primary">{{ motionStatusString }}</span></p>
-                <p class="current-reading">Motion last detected at: <br><span>{{ datetimeLastMovement }}</span></p>
-
-
-        <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
-        <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
-        <br>
-        <div class ="view-history">
-          <a class="btn btn-primary" href="/history">View History</a>
-        </div>
+        <p class="current-reading">No data</p>
         <hr/>
 
         <form action="/arduinopost?{{ query_params }}" method="post"><!--
