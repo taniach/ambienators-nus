@@ -25,6 +25,9 @@ handlers:
 - url: /
   script: ambienators-nus.app
 
+- url: /arduinopost
+  script: ambienators-nus.app
+
 - url: /.*
   script: ambienators-nus.app
   login: required

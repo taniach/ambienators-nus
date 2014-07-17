@@ -89,14 +89,14 @@
           </thead>
 
           <tbody>
-            {% for x in range(person.num_readings) %}
+            {% for x in query %}
             {% set outer_loop = loop %}
             <tr>
               <td>{{ outer_loop.index }}</td>
-              <td>{{ datetime }}</td>
-              <td>Column content</td>
-              <td>Column content</td>
-              <td>Column content</td>
+              <td>{{ x.lastupdate }}</td>
+              <td>{{ x.temp }}{{ person.temperature_unit }}</td>
+              <td>{{ x.light }}</td>
+              <td>{{ x.movement }}</td>
             </tr>
             {% endfor %}
             

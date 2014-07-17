@@ -16,6 +16,12 @@ indexes:
   - name: lastupdate
     direction: desc
 
+- kind: ArduinoSensorDataCommon
+  properties:
+  - name: user_name
+  - name: lastupdate
+    direction: desc
+
 - kind: Greeting
   ancestor: yes
   properties:

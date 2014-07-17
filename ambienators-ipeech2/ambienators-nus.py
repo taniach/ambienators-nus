@@ -62,6 +62,8 @@ class ArduinoSensorDataCommon(ndb.Model):
     temp = ndb.IntegerProperty()
     light = ndb.IntegerProperty()
     movement = ndb.IntegerProperty()
+    lastmovement = ndb.DateTimeProperty(auto_now_add=True)
+    lastupdate = ndb.DateTimeProperty(auto_now_add=True)
     user_name = ndb.StringProperty()
 
 class ArduinoPost(webapp2.RequestHandler):
@@ -73,31 +75,9 @@ class ArduinoPost(webapp2.RequestHandler):
         sensecommon.light = int(self.request.get('light'))
         sensecommon.user_name = self.request.get('username')
         k1 = sensecommon.put()
+        self.response.out.write("<html><body>"+str(k1)+"</body></html>")
 
-        # entity with user as a parent
-        sensordata = ArduinoSensorData(parent=ndb.Key('Persons', users.get_current_user().email()))
-
-        try:
-            # copy data
-            sensordata.temp = sensecommon.temp
-            sensordata.light = sensecommon.light
-            sensordata.lastupdate = datetime.datetime.now()
-            sensordata.movement = sensecommon.movement
-            
-            if sensecommon.movement == 1:
-                sensordata.lastmovement = datetime.datetime.now()
-
-            # if username in arduino request matches the current user nickname
-            if sensecommon.user_name == users.get_current_user().nickname():
-                k2 = sensordata.put()
-
-            params = urllib.urlencode({'username':users.get_current_user().nickname()})
-            # for testing
-            #self.response.out.write("<html><body>"+str(k1)+" "+str(k2)+"</body></html>")
-            self.redirect('/sensors?' + params)
-
-        except ValueError:
-            pass
+        
 
     def post(self):
         # common, get from arduino, no parent
@@ -203,8 +183,13 @@ class Sensors(webapp2.RequestHandler):
         person = parent.get()
 
         if user:  # signed in already
-            sense = ndb.gql("SELECT * FROM ArduinoSensorData WHERE ANCESTOR IS :1 ORDER BY lastupdate DESC", parent).get()
-            
+            #sense1 = ArduinoSensorDataCommon.query(ArduinoSensorDataCommon.user_name == users.get_current_user().nickname()).fetch(1)
+            #sense = sense1[-1]
+
+            name = users.get_current_user().nickname()
+
+            sense = ndb.gql("SELECT * FROM ArduinoSensorDataCommon WHERE user_name=:1 ORDER BY lastupdate DESC LIMIT 1", name).get()
+
             if sense:
                 if (sense.movement):
                     motionStatusString = "present"
@@ -249,11 +234,13 @@ class History(webapp2.RequestHandler):
         person = parent.get()
         
         if user:  # signed in already
+            query = ndb.gql("SELECT * FROM ArduinoSensorDataCommon WHERE user_name=:1 ORDER BY lastupdate DESC LIMIT %s" % person.num_readings, users.get_current_user().nickname())
             template_values = {
                 'user_mail': users.get_current_user().email(),
                 'nickname': users.get_current_user().nickname(),
                 'logout': users.create_logout_url(self.request.host_url),
                 'person': person,
+                'query': query,
                 'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
             }
             template = jinja_environment.get_template('history.html')
