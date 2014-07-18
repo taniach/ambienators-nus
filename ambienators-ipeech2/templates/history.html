@@ -20,25 +20,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]
-     <script type='text/javascript' src='http://www.google.com/jsapi'></script>
-                <script type='text/javascript'>
-                    google.load('visualization', '1', {'packages':['annotatedtimeline']});
-                    google.setOnLoadCallback(drawChart);
-                function drawChart()
-                {
-                    var data = new google.visualization.DataTable();
-                    data.addColumn('datetime', 'Date/Time');
-                    data.addColumn('number', 'Temperature');
-                    data.addColumn('number', 'Movement');
-
-                    data.addRows([
-{{ listToRowData }}
-                    ]);
- 
-                    var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
-                    chart.draw(data, {displayAnnotations: true});
-                }
-                </script>-->
+-->
 
     </head>
 
@@ -93,9 +75,9 @@
             {% set outer_loop = loop %}
             <tr>
               <td>{{ outer_loop.index }}</td>
-              <td>{{ x.lastupdate }}</td>
+              <td>{{ dates[outer_loop.index-1] }}</td>
               <td>{{ x.temp }}{{ person.temperature_unit }}</td>
-              <td>{{ x.light }}</td>
+              <td>{{ x.light }} %</td>
               <td>{{ x.movement }}</td>
             </tr>
             {% endfor %}
