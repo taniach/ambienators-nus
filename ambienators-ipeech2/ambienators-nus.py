@@ -52,7 +52,7 @@ class Persons(ndb.Model):
 
 
 class ArduinoSensorDataCommon(ndb.Model):
-    temp = ndb.IntegerProperty()
+    temp = ndb.FloatProperty()
     light = ndb.IntegerProperty()
     movement = ndb.IntegerProperty()
     lastmovement = ndb.DateTimeProperty(auto_now_add=True)
@@ -65,7 +65,7 @@ class ArduinoPost(webapp2.RequestHandler):
         # common, get from arduino, no parent
         sensecommon = ArduinoSensorDataCommon()
 
-        sensecommon.temp = int(self.request.get('temp'))
+        sensecommon.temp = int(self.request.get('temp'))/100.0
         sensecommon.movement = int(self.request.get('movement'))
         sensecommon.light = int(self.request.get('light'))
         sensecommon.user_name = self.request.get('username')
@@ -81,7 +81,7 @@ class ArduinoPost(webapp2.RequestHandler):
         # common, get from arduino, no parent
         sensecommon = ArduinoSensorDataCommon()
 
-        sensecommon.temp = int(self.request.get('temp'))
+        sensecommon.temp = int(self.request.get('temp'))/100.0
         sensecommon.movement = int(self.request.get('movement'))
         sensecommon.light = int(self.request.get('light'))
         sensecommon.user_name = self.request.get('username')
