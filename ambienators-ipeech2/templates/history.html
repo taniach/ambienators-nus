@@ -76,7 +76,13 @@
             <tr>
               <td>{{ outer_loop.index }}</td>
               <td>{{ dates[outer_loop.index-1] }}</td>
-              <td>{{ x.temp }}{{ person.temperature_unit }}</td>
+              {% if person.temperature_unit == 'celsius' %}
+              <td>{{ x.temp }} &deg; C</td>
+              {% elif person.temperature_unit == 'fahrenheit' %}
+              <td>{{ x.temp }} &deg; F</td>
+              {% else %}
+              <td>{{ x.temp }} K</td>
+              {% endif %}
               <td>{{ x.light }} %</td>
               <td>{{ x.movement }}</td>
             </tr>
