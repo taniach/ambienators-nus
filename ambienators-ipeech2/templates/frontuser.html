@@ -12,7 +12,30 @@
   <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
   <link rel="apple-touch-icon" href="../images/iosicon.png">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <!-- Auto refresh page every 30 seconds -->
+  <meta http-equiv="refresh" content="300" >
+
+  <!-- Fade in fade out page transition -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("body").css("display", "none");
+      $("body").fadeIn(3000);
+      $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(0, redirectPage);      
+      });
+         
+      function redirectPage() {
+      window.location = linkLocation;
+      }
+    });
+  </script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,14 +65,14 @@
         <div class="navbar-collapse collapse navbar-inverse-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href=""><span class="mylink">Home</span></a></li>
-            <li><a href="/sensors?username={{ nickname }}">Sensors</a></li>
-            <li><a href="/history?username={{ nickname }}">History</a></li>
-            <li><a href="/settings?username={{ nickname }}">Settings</a></li>
+            <li><a href="/sensors?username={{ nickname }}" class="transition">Sensors</a></li>
+            <li><a href="/history?username={{ nickname }}" class="transition">History</a></li>
+            <li><a href="/settings?username={{ nickname }}" class="transition">Settings</a></li>
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
             <li><a>{{ user_mail }}</a></li>
-            <li><a href="{{ logout }}">Logout</a></li>
+            <li><a href="{{ logout }}" class="transition">Logout</a></li>
           </ul>
 
         </div>
@@ -57,7 +80,7 @@
       </div>
 
       <div class="jumbotron">
-        <h1>Welcome!</h1>
+        <h1>Welcome, {{ nickname }}!</h1>
         <p>SmartAmbient Sensor system is made for YOU - the manager of a workplace, school, or office or anyone who wants to keep track of environmental data. Find out when a space is used most and whether it is heated and lit effectively. No more worrying about wasting electricity, now you can nail the culprits quickly and save your wallet!
         </p>
 

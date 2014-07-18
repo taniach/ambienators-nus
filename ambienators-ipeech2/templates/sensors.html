@@ -12,9 +12,30 @@
   <link href="../stylesheets/main.css" rel="stylesheet" type="text/css">
   <link rel="apple-touch-icon" href="../images/iosicon.png">
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <!-- Auto refresh page every 30 seconds -->
   <meta http-equiv="refresh" content="300" >
 
-  
+  <!-- Fade in fade out page transition -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("body").css("display", "none");
+      $("body").fadeIn(0);
+      $("a.transition").click(function(event){
+        event.preventDefault();
+        linkLocation = this.href;
+        $("body").fadeOut(0, redirectPage);      
+      });
+         
+      function redirectPage() {
+      window.location = linkLocation;
+      }
+    });
+  </script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,51 +61,58 @@
 
         <div class="navbar-collapse collapse navbar-inverse-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/mainuser?username={{ nickname }}">Home</a></li>
-            <li class="active"><a href="/sensors?username={{ nickname }}"><span class="mylink">Sensors</span></a></li>
-            <li><a href="/history?username={{ nickname }}">History</a></li>
-            <li><a href="/settings?username={{ nickname }}">Settings</a></li>
+            <li><a href="/mainuser?username={{ nickname }}" class="transition">Home</a></li>
+            <li class="active"><a href="/sensors?username={{ nickname }}" class="transition"><span class="mylink">Sensors</span></a></li>
+            <li><a href="/history?username={{ nickname }}" class="transition">History</a></li>
+            <li><a href="/settings?username={{ nickname }}" class="transition">Settings</a></li>
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
             <li><a>{{ user_mail }}</a></li>
-            <li><a href="{{ logout }}">Logout</a></li>
+            <li><a href="{{ logout }}" class="transition">Logout</a></li>
           </ul>
 
         </div>
 
       </div>
 
-
+      <div class="page-help">
+        <!--<h3>Real-time Sensor Data</h3>-->
+        <p>Hello, {{ nickname }}. This page displays your real-time sensor data.</p>
+        <p>Data displayed is updated as of {{ datetimeLastUpdate }}.</p>
+      </div>
       <div class="container">
+        <div class="row">
 
-        <!-- temperature -->
-        <p class="current-reading">Current temperature:<br>
+          <div class="col-md-4">
+          <!-- temperature -->
+          <p class="current-reading">Temperature<br>
           {% if person.temperature_unit == 'celsius' %}
-          <span class="text-primary">{{ temp }} &deg;C</span></p>
+          <span class="text-primary-larger">{{ temp }} &deg;C</span></p>
           {% elif person.temperature_unit == 'fahrenheit' %}
-          <span class="text-primary">{{ temp }} &deg;F</span></p>
+          <span class="text-primary-larger">{{ temp }} &deg;F</span></p>
           {% else %}
-          <span class="text-primary">{{ temp }} K</span></p>
+          <span class="text-primary-larger">{{ temp }} K</span></p>
           {% endif %}
+         </div>
 
-
+         <div class="col-md-4">
         <!-- light -->
-        <p class="current-reading">Current light intensity: <br><span class="text-primary">{{ light }} %</span></p>
-
-
+        <p class="current-reading">Light intensity<br><span class="text-primary-larger">{{ light }} %</span></p>
+          </div>
+          <div class="col-md-4">
         <!-- motion -->
-        <p class="current-reading">Motion <span class="text-primary">{{ motionStatusString }}</span></p>
-                <p class="current-reading">Motion last detected at: <br><span>{{ datetimeLastMovement }}</span></p>
+        <p class="current-reading">Motion<br><span class="text-primary-larger">{{ motionStatusString }}</span></p>
+                <!--<p class="current-reading">Motion last detected at: <br><span>{{ datetimeLastMovement }}</span></p>-->
+          </div>
+        </div>
 
 
-        <p class="date-time"><span class="text-primary">Last updated:</span> {{ datetimeLastUpdate }} </p>
-        <p class="date-time"><span class="text-primary">Current time:</span> {{ datetime }} </p>
         <br>
         <div class ="view-history">
-          <a class="btn btn-primary" href="/history">View History</a>
-        </div>
-        <hr/>
+          <a class="btn btn-primary" href="/history" class="transition">View History</a>
+        </div><br>
+        
 <!--
         <form action="/arduinopost?{{ query_params }}" method="post">
           Temperature:<input name="temp" type="number">
@@ -93,15 +121,23 @@
           <input type="submit" value="submit">
         </form><p>/arduinopost?{{ query_params }}</p><p>Replace /sensors... with the above line at the end of the url and change the values.</p>-->
 
+      <div class="sensors-lastupdate">
+        <!--<h3>Real-time Sensor Data</h3>-->
+        <p class="date-time">Last Updated:<span class="text-primary"> {{ datetimeLastUpdate }} </span></p>
+        <p class="date-time">Current Time:<span class="text-primary"> {{ datetime }} </span></p>
+      </div>
+
+      <hr/>
         <footer>
+          
           <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
+
         </footer>
 
       </div>
 
 
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="../bootstrap/js/bootstrap.min.js"></script>
     </body>
