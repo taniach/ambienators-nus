@@ -1,6 +1,33 @@
 .jumbotron {
 	padding-left: 10%;
 	padding-right: 10%;
+	font-family: 'Open Sans';
+	font-weight: 300;
+}
+
+.page-help {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-size: 20px;
+	text-align: center;
+	background-color: #f4f4f4;	
+}
+
+
+.sensors-lastupdate {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-size: 13px;
+
+	background-color: #f4f4f4;	
 }
 
 footer {
@@ -9,6 +36,11 @@ footer {
 
 hr {
 	margin-top: 50px;
+}
+
+.navbar-brand { /*SmartAmbient Sensor title in nav bar*/
+	font-family: 'Open Sans';
+	font-weight: 400;
 }
 
 .current-reading {
@@ -70,7 +102,8 @@ ul li.active {
 
 ul li {
 	font-size: 16px;
-	font-family: 'Georgia', sans-serif;
+	font-family: 'Open Sans';
+	font-weight: 300;
 }
 
 .mylink {
@@ -83,4 +116,62 @@ ul li {
 
 .btn-lg {
 	font-size: 0.9em;
+	font-family: 'Open Sans';
+	font-weight: 300;
+}
+
+
+h1 { /* the welcome word */
+	font-family: 'Open Sans';
+	font-weight: 400;
+}
+
+
+h2 { /* heading for main and mainuser */
+	font-family: 'Open Sans';
+	font-weight: 400;
+}
+
+h3 { /* heading for main and mainuser */
+	font-family: 'Open Sans';
+	font-weight: 400;
+}
+
+p { 
+	font-family: 'Open Sans';
+	font-weight: 300;
+}
+
+
+.text-primary-larger {
+	font-family: 'Open Sans';
+	font-weight: 400;
+	color: red;
+	font-size: 35px;
+
+}
+
+.text-primary {
+	font-family: 'Open Sans';
+	font-weight: 400;
+	color: red;
+}
+
+.table {
+	font-family: 'Open Sans';
+	font-weight: 400;
+
+}
+
+.form-horizontal {
+	font-family: 'Open Sans';
+	font-weight: 300;
+}
+
+
+.col-md-4 p:hover {
+	
+	background: #f4f4f4;
+
+
 }
