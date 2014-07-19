@@ -292,7 +292,7 @@
           <fieldset>
 
             <legend>History</legend>
-
+<!--
             <div class="form-group">
               
               <label class="col-lg-2 control-label">How often should history be logged?</label>
@@ -302,14 +302,14 @@
 
                 <label for="select" class="col-lg-1 control-label">Every</label>
              
-                <!-- Number -->
+                
                 
                 
                 <div class="col-lg-2">
                   <input type="number" step="1" min="1" class="form-control" id="select-historylog-value" name="select-historylog-value" value={{ person.history_log_value }} placeholder="30">
                 </div>
               
-                <!-- Units -->
+                
                 
                 <div class="col-lg-2">
                   <select class="form-control" id="select-historylog-unit" name="select-historylog-unit">
@@ -323,7 +323,7 @@
                 <br/>
 
               </div>
-            </div>
+            </div>-->
             
             <div class="form-group">
               <label class="col-lg-2 control-label">How many readings to display?</label>
@@ -341,7 +341,7 @@
                 <br/>
               </div>
             </div>
-            <div class="extra-space"></div>
+            <div class="extra-space"></div><br>
 
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
@@ -354,7 +354,7 @@
         </form> <!-- End history settings -->
 
         <div class="extra-space"></div>
-        <div class="extra-space2"></div>
+        <!--<div class="extra-space2"></div>-->
         <hr/>
 
         <footer>
@@ -370,33 +370,3 @@
       <script src="../bootstrap/js/bootstrap.min.js"></script>
     </body>
     </html>
-
-    <!--
-      onclick=
-                    "document.getElementById('notify-time-value').disabled = true;
-                    document.getElementById('notify-time-unit').disabled = true;
-                    document.getElementById('above-below-temp').disabled = false;
-                    document.getElementById('notify-temp-val').disabled = false;
-                    document.getElementById('notify-temp-unit').disabled = false;
-                    document.getElementById('above-below-light').disabled = false;
-                    document.getElementById('notify-light-val').disabled = false;
-                    document.getElementById('present-notpresent').disabled = false;
-                    document.getElementById('tbox').disabled = false;
-                    document.getElementById('lbox').disabled = false;
-                    document.getElementById('mbox').disabled = false;
-                    "
-
-       onclick=
-                    "document.getElementById('notify-time-value').disabled = false;
-                    document.getElementById('notify-time-unit').disabled = false;
-                    document.getElementById('above-below-temp').disabled = true;
-                    document.getElementById('notify-temp-val').disabled = true;
-                    document.getElementById('notify-temp-unit').disabled = true;
-                    document.getElementById('above-below-light').disabled = true;
-                    document.getElementById('notify-light-val').disabled = true;
-                    document.getElementById('present-notpresent').disabled = true;
-                    document.getElementById('tbox').disabled = true;
-                    document.getElementById('lbox').disabled = true;
-                    document.getElementById('mbox').disabled = true;
-                    "
-    -->

@@ -44,8 +44,8 @@ class Persons(ndb.Model):
     notify_motion = ndb.StringProperty()
 
     # How often to record history
-    history_log_value = ndb.IntegerProperty()
-    history_log_unit = ndb.StringProperty()
+    #history_log_value = ndb.IntegerProperty()
+    #history_log_unit = ndb.StringProperty()
 
     # Number of readings to display
     num_readings = ndb.IntegerProperty()
@@ -134,8 +134,8 @@ class MainPageUser(webapp2.RequestHandler):
 
             person.num_readings = 5
 
-            person.history_log_value = 2
-            person.history_log_unit = 'days'
+            #person.history_log_value = 2
+            #person.history_log_unit = 'days'
 
             person.put()
 
@@ -173,7 +173,7 @@ class Sensors(webapp2.RequestHandler):
 
                 template_values = {
                     'person': person,
-                    'temp': str(sense.temp),
+                    'temp': sense.temp,
                     'light': str(sense.light),
                     'datetimeLastMovement': (sense.lastmovement + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
                     'datetime': (datetime.datetime.now() + datetime.timedelta(hours=person.time_zone)).strftime("%d %b %y, %I.%M.%S %p"),
@@ -275,8 +275,8 @@ class Settings(webapp2.RequestHandler):
 
         person.notify_motion = self.request.get('present-notpresent')
 
-        person.history_log_value = int(self.request.get('select-historylog-value'))
-        person.history_log_unit = self.request.get('select-historylog-unit')
+        #person.history_log_value = int(self.request.get('select-historylog-value'))
+        #person.history_log_unit = self.request.get('select-historylog-unit')
 
         person.num_readings = int(self.request.get('inputReadings'))
 

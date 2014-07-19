@@ -108,9 +108,9 @@
               {% if person.temperature_unit == 'celsius' %}
               <td>{{ x.temp }} &deg; C</td>
               {% elif person.temperature_unit == 'fahrenheit' %}
-              <td>{{ x.temp }} &deg; F</td>
+              <td>{{ (32+(9.0/5.0)*x.temp)|round(2) }} &deg; F</td>
               {% else %}
-              <td>{{ x.temp }} K</td>
+              <td>{{ x.temp+273 }} K</td>
               {% endif %}
               <td>{{ x.light }} %</td>
               
