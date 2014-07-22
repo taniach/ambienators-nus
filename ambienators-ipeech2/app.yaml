@@ -28,6 +28,9 @@ handlers:
 - url: /
   script: ambienators-nus.app
 
+- url: /how_to_use
+  script: ambienators-nus.app
+
 - url: /arduinopost
   script: ambienators-nus.app
 

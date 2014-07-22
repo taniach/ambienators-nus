@@ -284,11 +284,39 @@ class Settings(webapp2.RequestHandler):
         self.redirect('/settings')
 
 
+class HowToUse(webapp2.RequestHandler):
+
+    def get(self):
+        user = users.get_current_user()
+
+        if user:
+            template_values = {
+                'user_mail': users.get_current_user().email(),
+                'urllink': users.create_logout_url(self.request.host_url),
+                'nickname': users.get_current_user().nickname(),
+                'urltext': 'Logout'
+            }
+            template = jinja_environment.get_template('how_to_use.html')
+            self.response.write(template.render(template_values))
+
+        else:
+            template_values = {
+                'user_mail': '',
+                'urllink': users.create_login_url(self.request.host_url),
+                'nickname': '',
+                'urltext': 'Login'
+            }
+            template = jinja_environment.get_template('how_to_use.html')
+            self.response.write(template.render(template_values))
+
+
+
     
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/mainuser', MainPageUser),
                                ('/arduinopost', ArduinoPost),
                                ('/sensors', Sensors),
+                               ('/how_to_use', HowToUse),
                                ('/history', History),
                                ('/settings', Settings)],
                               debug=True)
