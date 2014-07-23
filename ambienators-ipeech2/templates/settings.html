@@ -74,8 +74,8 @@
 
       </div>
     <div class="page-help">
-        <p>Hello, {{ nickname }}. You can adjust various settings pertaining to temperature units, time zone, notifications and history. </p>
-        <p>Please remember to click save after adjusting the settings.</p>
+        <p>Hello, {{ nickname }}. You can adjust various settings pertaining to temperature units, time zone and history. </p>
+        <p>Click save after adjusting the settings.</p>
       </div>
 
       <div class="container">
@@ -124,6 +124,8 @@
           </fieldset>
           <!-- End temperature settings -->
 
+          <div class="extra-space2"></div>
+
           <fieldset>
 
             <legend>Date and Time</legend>
@@ -146,35 +148,35 @@
 
           </fieldset>
 
-
+<!--
           <fieldset>
 
             <legend>Notifications</legend>
 
             <div class="form-group">
               <label class="col-lg-2 control-label">How should I be notified?</label>
-              <div class="col-lg-10">
+              <div class="col-lg-10"> -->
 
                 <!-- By time -->
 
                 <!-- Time radio button -->
-
+<!--
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" name="notify-type" id="optionsRadios1" value="by-time" {% if 'by-time' in person.notify_type %} checked {% endif %}>
                     <span class="radio-option text-primary">By time</span>
                   </label>
                 </div>
-                <div class="extra-space2"></div>
+                <div class="extra-space2"></div>-->
 
-                <!-- Time options -->
+                <!-- Time options 
                 
-                <label for="select" class="col-lg-1 control-label">Every</label>
-                <!-- Number -->
+                <label for="select" class="col-lg-1 control-label">Every</label>-->
+                <!-- Number 
                 <div class="col-lg-2">
                   <input type="number" step="1" min="1" class="form-control" id="notify-time-value" name="notify-time-value" value={{ person.notify_time_value }} placeholder="30">
-                </div>
-                <!-- Units -->
+                </div>-->
+                <!-- Units 
                 <div class="col-lg-2">
                   <select class="form-control" id="notify-time-unit" name="notify-time-unit">
                     <option value="minutes" {% if person.notify_time_unit == 'minutes' %} selected="selected" {% endif %}>minutes</option>
@@ -186,22 +188,22 @@
                 </div>
                 <br/> 
                 <div class="extra-space"></div>
-                <div class="extra-space"></div>
+                <div class="extra-space"></div>-->
 
                 <!-- By parameters -->
 
-                <!-- Parameter radio button -->
+                <!-- Parameter radio button 
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" name="notify-type" id="optionsRadios2" value="by-parameters" {% if 'by-parameters' in person.notify_type %} checked {% endif %}>
                     <span class="radio-option text-primary">By parameters</span>
                   </label>
                 </div>
-                <div class="extra-space"></div>
+                <div class="extra-space"></div>-->
 
                 <!-- Parameter options -->
 
-                <!-- Temperature -->
+                <!-- Temperature 
 
                 <div class="form-group">
                   <label class="col-lg-1 box">
@@ -231,9 +233,9 @@
 
                   <br/>
                   
-                </div> <!-- End temperature -->
+                </div> --><!-- End temperature -->
 
-                <!-- Light -->
+                <!-- Light 
                 <div class="form-group">
                   <label class="col-lg-1 box">
                     <input type="checkbox" name="parameter" value="by-light" id="lbox" {% if 'by-light' in person.notify_parameters %} checked {% endif %}>
@@ -258,9 +260,9 @@
 
                   <br/>
                   
-                </div> <!-- End light -->
+                </div>--> <!-- End light -->
 
-                <!-- Motion -->
+                <!-- Motion 
                 <div class="form-group">
                   <label class="col-lg-1 box">
                     <input type="checkbox" name="parameter" value="by-motion" id="mbox" {% if 'by-motion' in person.notify_parameters %} checked {% endif %}>
@@ -277,12 +279,12 @@
 
                   <br/>
                   <div class="extra-space"></div>
-                </div> <!-- End motion -->
+                </div>--> <!-- End motion 
 
               </div>
             </div>
 
-          </fieldset>
+          </fieldset>-->
           <!-- End notification settings -->
 
           <div class="extra-space2"></div>

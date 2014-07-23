@@ -21,6 +21,8 @@ class Persons(ndb.Model):
     # Timezone
     time_zone = ndb.FloatProperty()
 
+    """
+
     # By time or by parameters 
     notify_type = ndb.StringProperty(repeated=True)
 
@@ -41,11 +43,11 @@ class Persons(ndb.Model):
     notify_light_value = ndb.IntegerProperty()
 
     # Notify by motion
-    notify_motion = ndb.StringProperty()
+    notify_motion = ndb.StringProperty() 
 
     # How often to record history
-    #history_log_value = ndb.IntegerProperty()
-    #history_log_unit = ndb.StringProperty()
+    history_log_value = ndb.IntegerProperty()
+    history_log_unit = ndb.StringProperty() """
 
     # Number of readings to display
     num_readings = ndb.IntegerProperty()
@@ -116,7 +118,7 @@ class MainPageUser(webapp2.RequestHandler):
 
             person.time_zone = 8.00
 
-            person.notify_type = ['by-time']
+            """person.notify_type = ['by-time']
 
             person.notify_time_value = 4
             person.notify_time_unit = 'days'
@@ -130,7 +132,7 @@ class MainPageUser(webapp2.RequestHandler):
             person.notify_light_abe = 'above'
             person.notify_light_value = 90
 
-            person.notify_motion = 'present'
+            person.notify_motion = 'present'"""
 
             person.num_readings = 5
 
@@ -259,7 +261,7 @@ class Settings(webapp2.RequestHandler):
 
         person.time_zone = float(self.request.get('input-time-zone'))
 
-        person.notify_type = self.request.get_all('notify-type')
+        """person.notify_type = self.request.get_all('notify-type')
 
         person.notify_time_value = int(self.request.get('notify-time-value'))
         person.notify_time_unit = self.request.get('notify-time-unit')
@@ -275,8 +277,8 @@ class Settings(webapp2.RequestHandler):
 
         person.notify_motion = self.request.get('present-notpresent')
 
-        #person.history_log_value = int(self.request.get('select-historylog-value'))
-        #person.history_log_unit = self.request.get('select-historylog-unit')
+        person.history_log_value = int(self.request.get('select-historylog-value'))
+        person.history_log_unit = self.request.get('select-historylog-unit')"""
 
         person.num_readings = int(self.request.get('inputReadings'))
 
