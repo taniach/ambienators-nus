@@ -18,31 +18,85 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 
-  <!-- Fade in fade out page transition -->
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("body").css("display", "none");
-      $("body").fadeIn(0);
-      $("a.transition").click(function(event){
-        event.preventDefault();
-        linkLocation = this.href;
-        $("body").fadeOut(0, redirectPage);      
-      });
-         
-      function redirectPage() {
-      window.location = linkLocation;
-      }
-    });
-  </script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+
+      <!-- Begin jquery hide show div script -->
+      <script>
+        $(document).ready(function(){
+          $(".show_usingwebapp").click(function(){
+            $("div.usingwebapp").show();
+            $("div.iwantambienators").hide();
+            $("div.aboutdevs").hide();
+          });
+
+          $(".show_aboutdevs").click(function(){
+            $("div.aboutdevs").show();
+            $("div.iwantambienators").hide();
+            $("div.usingwebapp").hide();
+          });
+
+          $(".hide_iwantambienators").click(function(){
+            $("div.iwantambienators").hide();
+          });
+  
+          $(".show_iwantambienators").click(function(){
+            $("div.iwantambienators").show();
+            $("div.usingwebapp").hide();
+            $("div.aboutdevs").hide();
+
+
+
+          $(".hide_usingwebapp").click(function(){
+            $("div.usingwebapp").hide();
+          });
+  
+
+
+
+          $(".hide_aboutdevs").click(function(){
+            $("div.aboutdevs").hide();
+          });
+
+        });
+
+            $(".hide_outofthebox").click(function(){
+              $("div.outofthebox").hide();
+            });
+  
+          $(".show_outofthebox").click(function(){
+            $("div.outofthebox").show();
+            $("div.havesomefun").hide();
+          });
+
+        $(".hide_havesomefun").click(function(){
+            $("div.havesomefun").hide();
+        });
+  
+        $(".show_havesomefun").click(function(){
+          $("div.havesomefun").show();
+          $("div.outofthebox").hide();
+        });
+
+
+
+
+
+
+      });
+</script>
+
+
     </head>
 
     <body>
+
+
 
       <!-- Top navbar -->
       <div class="navbar navbar-inverse">
@@ -66,7 +120,7 @@
             <li><a href="/sensors?username={{ nickname }}" class="transition">Sensors</a></li>
             <li><a href="/history?username={{ nickname }}" class="transition">History</a></li>
             <li><a href="/settings?username={{ nickname }}">Settings</a></li>
-            <li class="active"><a href="" class="transition"><span class="mylink">How to use</span></a></li>
+            <li class="active"><a href="" class="transition"><span class="mylink">Information</span></a></li>
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
@@ -77,13 +131,96 @@
         </div>
 
       </div>
-    <div class="page-help">
-        
-        <p>This page explains how to set up the hardware and use this app.</p>
-      </div>
+
 
       <div class="container">
-        
+
+       
+        <div class="information_page">
+          <h1 style="text-align: center;"><a href="#" class="show_iwantambienators" >Getting Ambienators and Initializing Unit (+</a>/<a href="#" class="hide_iwantambienators">-</a>)</h1>
+          
+          <div class="iwantambienators" style="display:none;">
+       
+
+            
+            <h3 style="text-align: left;"><a href="#" class="show_outofthebox">I want my ambient sensor to just work! (+</a>/<a href="#" class="hide_outofthebox">-</a>)</h3>
+
+            <div class="outofthebox" style="display:none;">
+              <p>Our team will deliver you a ready-made Ambienators SmartSensor System unit at a negotiable price!</p>
+              <p>Simply email us at <b>ambienators.nus@gmail.com</b>, providing the following details:</p>
+              <p>1) Your name</p>
+              <p>2) Google account email address which you would like to be associated with your account (It could be your personal Google account, or a company Google account. Google Apps accounts are also supported!)</p>
+              <p>3) How we can contact you (email address / phone number)</p>
+            </div>
+            
+            <h3 style="text-align: left;"><a href="#" class="show_havesomefun">I'm feeling brave, and I wanna get my hands dirty! (+</a>/<a href="#" class="hide_havesomefun">-</a>)</h3>
+
+
+
+            <div class="havesomefun" style="display:none;">
+              <p>So, you’re an adventurous one! That’s great! Now, we’ll assume you already have a basic understanding of arduino programming and electrical engineering (otherwise you should be selecting the ‘just work’ option above!).</p>
+
+              <p>We suggest you learn the basics of arduino from Jeremy Blum’s Arduino Tutorials on YouTube which can be found here, and study the arduino official guides which can be found here. </p>
+              
+              <p>You’ll need an arduino uno, an arduino ethernet shield, a temperature sensor, a light sensor (Light-Dependent Resistor) and a motion sensor. Remember to also purchase a power supply for the arduino, and a LAN cable to connect the ethernet shield to your ethernet port!</p>
+              
+              <p>Wire these little gadgets together:<br>
+              <b>Temperature sensor</b> to Arduino <b>Analog Pin 0</b><br>
+              <b>Light sensor</b> to Arduino <b>Analog Pin 2</b><br>
+              <b>Motion sensor</b> to Arduino <b>Analog Pin 3</b></p>
+
+              <p>Once you’re done, you’ll be able to utilise our Ambienators arduino sketch, which can be downloaded here. However, there are a few things you’d need to modify.</p>
+              
+              <p>Line 5: <div class="code">String userName = "ambienators.nus";</div> <br>
+                Modify the default username shown. Change it to the username of the Google Account you wish to be associated with your arduino unit. It could be your personal Google account, or a company Google account. Google Apps accounts are also supported!</p>
+
+              <p>Line 6: <div class="code">int frequency = 15*60;</div><br>
+              You may wish to modify how often you want ambient data to be sent from the arduino to the cloud, in seconds. Default value is set to 15*60 seconds (15 minutes). You may modify this. However, to prevent server overload, we do not recommend you set a value less than 5 minutes. </p>
+
+              <p>Line 9: <div class="code">byte mac[] = {  0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };</div><br>
+              Enter the MAC address for your Arduino ethernet shield here. Turn the ethernet shield over, and look at the back of the shield to find the MAC address. </p>
+
+              <p>After modifying these changes, simply save the changes, and upload your sketch! Your unit should begin sending data to the Ambienators webapp.</p>
+</p>
+          </div>
+        </div>
+          <hr>
+          <h1 style="text-align: center;"><a href="#" class="show_usingwebapp">Using the Ambienators Webapp (+</a>/<a href="#" class="hide_usingwebapp">-</a>)</h1>
+          <div class="usingwebapp" style="display:none;">
+          <p>At this stage, we’ll assume that you have already got the hardware setup and working. </p>
+
+          <p><b>Login:</b><br>
+          The first thing to do is to login. At Ambienators, we believe in the importance of keeping your data save and secure, and privacy is important. Each Ambienators unit is associated with a Google Account. It could be your personal Google account, or a company Google account. Google Apps accounts are also supported! Simply click on the Login button you see on the top right corner of the page!</p>
+
+          <p><b>View real-time sensor data: </b><br>
+          Click on the “Sensors” tab! You’ll see three sets of data: Temperature, Light Intensity and Motion. </p>
+
+          <p><b>View sensor data history:</b><br>
+          Click on the “History” tab! You’ll see the three sets of data, except many more. It is a self-explanatory table with the date and time shown beside each set of readings. </p>
+
+          <p><b>Change settings:</b><br>
+          Click on the “Settings” tab! You can adjust various settings pertaining to temperature units (display your temperature in degrees Celcius, Fahrenheit or Kelvin), time zone and history. Do remember to click save after adjusting the settings.</p>
+
+          <p>If you still have any enquiries, you may email us at ambienators.nus@gmail.com.</p>
+        </div>
+
+<hr>
+
+          <h1 style="text-align: center;"><a href="#" class="show_aboutdevs">About the Developers (+</a>/<a href="#" class="hide_aboutdevs">-</a>)</h1>
+          <div class="aboutdevs" style="display:none;">
+            <div class="profilepics" style="text-align: center;">
+              <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/t1.0-1/p160x160/10441053_10152109728592452_8604974622942767352_n.jpg"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/t1.0-1/c0.0.160.160/p160x160/1662267_773496726011047_1648696119_n.jpg">
+
+            <p>Ambienators was co-developed by two NUS Computer Engineering undergraduates, <a href="http://facebook.com/ipeech" target="_blank">Pee Choon Hian</a> and <a href="https://www.facebook.com/tania.chattopadhyay.1" target="_blank">Tania Chattopadhyay</a>.</p>
+            <p>This project was done under the NUS School-Of-Computing Orbital 2014 Summer Programme.</p>
+            <p>Choon Hian can be contacted at peech@nus.edu.sg.</p>
+            <p>Tania can be contacted at </p>
+            </div>
+          </div>
+
+
+
+
 
         <hr>
 

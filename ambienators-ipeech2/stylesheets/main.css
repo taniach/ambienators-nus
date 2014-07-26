@@ -139,7 +139,7 @@ h3 { /* heading for main and mainuser */
 
 p { 
 	font-family: 'Open Sans';
-	font-weight: 300;
+	font-weight: 400;
 }
 
 
@@ -175,3 +175,15 @@ p {
 
 
 }
+
+.information_page {
+
+
+}
+
+.code {
+	font-family: "Andale Mono", Courier, "Courier New";
+	text-align: center;
+	color: black;
+}
+
