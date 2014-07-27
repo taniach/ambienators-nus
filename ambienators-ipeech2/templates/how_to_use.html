@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartAmbient - How to use</title>
+  <title>SmartAmbient - Instructions</title>
   <!-- Bootstrap Simplex-->
   <link href="../simplex/bootstrap.min.css" rel="stylesheet">
   <!-- Stylesheet -->
@@ -28,34 +28,34 @@
 
       <!-- Begin jquery hide show div script -->
       <script>
-        $(document).ready(function(){
-          $(".show_usingwebapp").click(function(){
-            $("div.usingwebapp").show();
-            $("div.iwantambienators").hide();
-            $("div.aboutdevs").hide();
-          });
+      $(document).ready(function(){
+        $(".show_usingwebapp").click(function(){
+          $("div.usingwebapp").show();
+          $("div.iwantambienators").hide();
+          $("div.aboutdevs").hide();
+        });
 
-          $(".show_aboutdevs").click(function(){
-            $("div.aboutdevs").show();
-            $("div.iwantambienators").hide();
-            $("div.usingwebapp").hide();
-          });
+        $(".show_aboutdevs").click(function(){
+          $("div.aboutdevs").show();
+          $("div.iwantambienators").hide();
+          $("div.usingwebapp").hide();
+        });
 
-          $(".hide_iwantambienators").click(function(){
-            $("div.iwantambienators").hide();
-          });
-  
-          $(".show_iwantambienators").click(function(){
-            $("div.iwantambienators").show();
-            $("div.usingwebapp").hide();
-            $("div.aboutdevs").hide();
+        $(".hide_iwantambienators").click(function(){
+          $("div.iwantambienators").hide();
+        });
+
+        $(".show_iwantambienators").click(function(){
+          $("div.iwantambienators").show();
+          $("div.usingwebapp").hide();
+          $("div.aboutdevs").hide();
 
 
 
           $(".hide_usingwebapp").click(function(){
             $("div.usingwebapp").hide();
           });
-  
+
 
 
 
@@ -65,19 +65,19 @@
 
         });
 
-            $(".hide_outofthebox").click(function(){
-              $("div.outofthebox").hide();
-            });
-  
-          $(".show_outofthebox").click(function(){
-            $("div.outofthebox").show();
-            $("div.havesomefun").hide();
-          });
+        $(".hide_outofthebox").click(function(){
+          $("div.outofthebox").hide();
+        });
+
+        $(".show_outofthebox").click(function(){
+          $("div.outofthebox").show();
+          $("div.havesomefun").hide();
+        });
 
         $(".hide_havesomefun").click(function(){
-            $("div.havesomefun").hide();
+          $("div.havesomefun").hide();
         });
-  
+
         $(".show_havesomefun").click(function(){
           $("div.havesomefun").show();
           $("div.outofthebox").hide();
@@ -91,130 +91,367 @@
       });
 </script>
 
+<style>
+p, li {
+  font-size: 1.2em;
+}
+ul, ol {
+  font-family: 'Open Sans';
+}
 
-    </head>
+.highlight {
+  background-color: yellow;
+}
 
-    <body>
+</style>
+
+
+</head>
+
+<body>
 
 
 
-      <!-- Top navbar -->
-      <div class="navbar navbar-inverse">
+  <!-- Top navbar -->
+  <div class="navbar navbar-inverse">
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">SmartAmbient Sensor</a>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">SmartAmbient Sensor</a>
+    </div>
+
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+      <ul class="nav navbar-nav">
+        {% if urltext == 'Logout' %}
+        <li><a href="/mainuser?username={{ nickname }}" class="transition">Home</a></li>
+        {% else %}
+        <li><a href="/" class="transition">Home</a></li>
+        {% endif %}
+        <li><a href="/sensors?username={{ nickname }}" class="transition">Sensors</a></li>
+        <li><a href="/history?username={{ nickname }}" class="transition">History</a></li>
+        <li><a href="/settings?username={{ nickname }}">Settings</a></li>
+        <li class="active"><a href="" class="transition"><span class="mylink">Information</span></a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a>{{ user_mail }}</a></li>
+        <li><a href="{{ urllink }}" class="transition">{{ urltext }}</a></li>
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <div class="container" style="padding-left: 50px;">
+
+
+    <div class="information_page">
+      <h2 style="text-align: center;"><a href="#" class="show_iwantambienators" >Getting Arduino and Initializing Unit (+</a>/<a href="#" class="hide_iwantambienators">-)</a></h2>
+
+      <div class="iwantambienators" style="display:none;">
+
+
+
+        <h3 style="text-align: left;"><a href="#" class="show_outofthebox">Easy (+</a>/<a href="#" class="hide_outofthebox">-)</a></h3>
+
+        <div class="outofthebox" style="display:none;">
+          <p>Our team will deliver you a ready-made Ambienators SmartSensor System unit at a negotiable price!</p>
+          <p>Simply email us at <b>ambienators.nus@gmail.com</b>, providing the following details:</p>
+          <p>1) Your name</p>
+          <p>2) Google account email address which you would like to be associated with your account (It could be your personal Google account, or a company Google account. Google Apps accounts are also supported!)</p>
+          <p>3) How we can contact you (email address / phone number)</p>
         </div>
 
-        <div class="navbar-collapse collapse navbar-inverse-collapse">
-          <ul class="nav navbar-nav">
-            {% if urltext == 'Logout' %}
-            <li><a href="/mainuser?username={{ nickname }}" class="transition">Home</a></li>
-            {% else %}
-            <li><a href="/" class="transition">Home</a></li>
-            {% endif %}
-            <li><a href="/sensors?username={{ nickname }}" class="transition">Sensors</a></li>
-            <li><a href="/history?username={{ nickname }}" class="transition">History</a></li>
-            <li><a href="/settings?username={{ nickname }}">Settings</a></li>
-            <li class="active"><a href="" class="transition"><span class="mylink">Information</span></a></li>
+        <h3 style="text-align: left;"><a href="#" class="show_havesomefun">Medium (+</a>/<a href="#" class="hide_havesomefun">-)</a></h3>
+
+
+
+        <div class="havesomefun" style="display:none;">
+          <br>
+          <p>In order to setup Arduino environment, you need to work with hardware and software. The software is available free of cost. Hardware components need to be purchased. Approximate hardware cost of this application is US$70-$80. Purchase these products <a href="http://arduino.cc/en/Main/Buy" target="_blank">here</a>. Buy from the Arduino store or distributors in your country.</p>
+          <h3>Hardware required:</h3><br>
+          <ul>
+            <li>1 Arduino Uno <br><br><img src="../images/arduinouno.jpg" height="240px" width="350px"> <br><br><br></li>
+
+            <li>1 Arduino Ethernet Shield <br><br><img src="../images/arduinoethernet.jpg" height="240px" width="320px"><br><br><br></li>
+
+            <li>1 breadboard <br><br><img src="../images/breadboard.jpg" height="300px" width="340px"><br><br></li>
+
+            <li>1 temperature sensor (LM35, TMP36 or any other sensor) <br><br><img src="../images/tmp36.jpg" height="180px" width="240px"><br><br><br></li>
+
+            <li>1 light-dependent resistor (LDR) <br><br><img src="../images/ldr.jpg" height="180px" width="200px"><br><br><br></li>
+
+            <li>1 330&ohm; resistor (first 3 colours orange-orange-brown) <br><br><img src="../images/resistor330.jpg" height="180px" width="240px"><br><br><br></li>
+
+            <li>1 passive infrared (PIR) sensor <br><br><img src="../images/pir.jpg" height="180px" width="200px"><br><br><br></li>
+
+            <li>11 jumper wires <br><br><img src="../images/wires.jpg" height="180px" width="240px"><br><br><br></li>
+
+            <li>LAN cable <br><br><img src="../images/lan.gif" height="180px" width="240px"><br><br><br></li>
+
+            <li>USB cable or 5V external power supply for Arduino (supplied with Arduino board) <br><br><img src="../images/usb.jpg" height="180px" width="240px"><br><br><br></li>
           </ul>
-          
-          <ul class="nav navbar-nav navbar-right">
-            <li><a>{{ user_mail }}</a></li>
-            <li><a href="{{ urllink }}" class="transition">{{ urltext }}</a></li>
-          </ul>
 
-        </div>
+          <br><br>
 
-      </div>
+          <h3>Software setup:</h3><br>
 
+          <p>The Arduino IDE looks a text editor or word processing software like MS Word. This is where you can write code and program the Arduino board to do things you want.</p>
 
-      <div class="container">
+          <p>Read the <a href="http://arduino.cc/en/Guide/HomePage" target="_blank">Arduino guide</a> for your operating system to download the IDE, connect the Arduino Uno and install drivers.</p>
 
-       
-        <div class="information_page">
-          <h1 style="text-align: center;"><a href="#" class="show_iwantambienators" >Getting Ambienators and Initializing Unit (+</a>/<a href="#" class="hide_iwantambienators">-</a>)</h1>
-          
-          <div class="iwantambienators" style="display:none;">
-       
-
-            
-            <h3 style="text-align: left;"><a href="#" class="show_outofthebox">I want my ambient sensor to just work! (+</a>/<a href="#" class="hide_outofthebox">-</a>)</h3>
-
-            <div class="outofthebox" style="display:none;">
-              <p>Our team will deliver you a ready-made Ambienators SmartSensor System unit at a negotiable price!</p>
-              <p>Simply email us at <b>ambienators.nus@gmail.com</b>, providing the following details:</p>
-              <p>1) Your name</p>
-              <p>2) Google account email address which you would like to be associated with your account (It could be your personal Google account, or a company Google account. Google Apps accounts are also supported!)</p>
-              <p>3) How we can contact you (email address / phone number)</p>
-            </div>
-            
-            <h3 style="text-align: left;"><a href="#" class="show_havesomefun">I'm feeling brave, and I wanna get my hands dirty! (+</a>/<a href="#" class="hide_havesomefun">-</a>)</h3>
+          <p>The functions of buttons in the IDE are shown here.<br><br><img src="../images/ide2.png"></p><br><br><br><br>
 
 
+          <h3>Hardware setup:</h3><br>
 
-            <div class="havesomefun" style="display:none;">
-              <p>So, you’re an adventurous one! That’s great! Now, we’ll assume you already have a basic understanding of arduino programming and electrical engineering (otherwise you should be selecting the ‘just work’ option above!).</p>
+          <p>Mount the ethernet shield on top of the Arduino Uno. Insert every pin of the shield into the corresponding pin of the Uno board.</p><br>
 
-              <p>We suggest you learn the basics of arduino from Jeremy Blum’s Arduino Tutorials on YouTube which can be found here, and study the arduino official guides which can be found here. </p>
+          <img src="../images/ethernetuno.jpg" height="240px" width="300px"><br><br>
+
+          <br><p>Connect the parts according to the following diagram.</p><br>
+
+          <img src="../images/diagram.jpg"><br><br>
+
+          <p>Connect the Arduino Uno to your computer with a USB cable. Connect one end of the LAN cable to the ethernet shield and the other end to a modem or LAN port. The power LED on the shield will light up.</p><br>
+
+          <h3>Arduino code:</h3><br>
+
+          <ol>
+
+            <li>Open a new sketch in the IDE.</li>
+
+            <li>Copy the code below and paste it in the sketch. <br><br>
               
-              <p>You’ll need an arduino uno, an arduino ethernet shield, a temperature sensor, a light sensor (Light-Dependent Resistor) and a motion sensor. Remember to also purchase a power supply for the arduino, and a LAN cable to connect the ethernet shield to your ethernet port!</p>
-              
-              <p>Wire these little gadgets together:<br>
-              <b>Temperature sensor</b> to Arduino <b>Analog Pin 0</b><br>
-              <b>Light sensor</b> to Arduino <b>Analog Pin 2</b><br>
-              <b>Motion sensor</b> to Arduino <b>Analog Pin 3</b></p>
+                <pre>                 
+#include &lt;SPI.h&gt;
+#include &lt;Ethernet.h&gt;
 
-              <p>Once you’re done, you’ll be able to utilise our Ambienators arduino sketch, which can be downloaded here. However, there are a few things you’d need to modify.</p>
-              
-              <p>Line 5: <div class="code">String userName = "ambienators.nus";</div> <br>
-                Modify the default username shown. Change it to the username of the Google Account you wish to be associated with your arduino unit. It could be your personal Google account, or a company Google account. Google Apps accounts are also supported!</p>
 
-              <p>Line 6: <div class="code">int frequency = 15*60;</div><br>
-              You may wish to modify how often you want ambient data to be sent from the arduino to the cloud, in seconds. Default value is set to 15*60 seconds (15 minutes). You may modify this. However, to prevent server overload, we do not recommend you set a value less than 5 minutes. </p>
+//USERS: ONLY ADJUST THESE VALUES
 
-              <p>Line 9: <div class="code">byte mac[] = {  0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };</div><br>
-              Enter the MAC address for your Arduino ethernet shield here. Turn the ethernet shield over, and look at the back of the shield to find the MAC address. </p>
+//*****************************************************************************
+String userName = "<span class="highlight">ambienators.nus</span>"; //Enter your Google Account userame
 
-              <p>After modifying these changes, simply save the changes, and upload your sketch! Your unit should begin sending data to the Ambienators webapp.</p>
-</p>
-          </div>
-        </div>
-          <hr>
-          <h1 style="text-align: center;"><a href="#" class="show_usingwebapp">Using the Ambienators Webapp (+</a>/<a href="#" class="hide_usingwebapp">-</a>)</h1>
-          <div class="usingwebapp" style="display:none;">
-          <p>At this stage, we’ll assume that you have already got the hardware setup and working. </p>
+int frequency = <span class="highlight">5*60</span>; //Enter how often you want data to be sent, in seconds 
 
-          <p><b>Login:</b><br>
-          The first thing to do is to login. At Ambienators, we believe in the importance of keeping your data save and secure, and privacy is important. Each Ambienators unit is associated with a Google Account. It could be your personal Google account, or a company Google account. Google Apps accounts are also supported! Simply click on the Login button you see on the top right corner of the page!</p>
 
-          <p><b>View real-time sensor data: </b><br>
-          Click on the “Sensors” tab! You’ll see three sets of data: Temperature, Light Intensity and Motion. </p>
+// Enter the MAC address of your ethernet shield
+byte mac[] = <span class="highlight">{  0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 }</span>;
 
-          <p><b>View sensor data history:</b><br>
-          Click on the “History” tab! You’ll see the three sets of data, except many more. It is a self-explanatory table with the date and time shown beside each set of readings. </p>
+//*****************************************************************************
+
+//USERS: DO NOT EDIT ANY OF THE CODE BELOW THIS LINE
+
+
+//Cannot use Pins 4,10,11,12,13 as they are in use by ethernet shield
+
+
+//Pins
+int tempPin = 0;
+int lightPin = 2;
+int motionPin = 3;
+
+
+//Data
+float temp = 0.0;
+float light = 0.0;
+volatile int movement = 0;
+volatile int moves =0;
+
+
+//Server to connect to
+char serverName[] = "http://ambienators-nus.appspot.com";
+
+
+// Initialize the Ethernet client library
+EthernetClient client;
+
+void setup()
+{
+    //analogReference FOR TEMPERATURE, LIGHT AND MOTION SENSORS
+    analogReference(INTERNAL);
+
+    //INITIALIZE SERIAL MONITOR
+    Serial.begin(9600);
+
+    //START THE ETHERNET CONNECTION
+    if (Ethernet.begin(mac) == 0) {
+         while(true);
+    }
+
+    //GIVE THE ETHERNET SHIELD ONE SECOND TO INITIALIZE
+    delay(1000);
+}
+
+
+//OBTAIN TEMPERATURE
+//OBTAIN LIGHT
+//POSTS THE DATA
+//RESETS MOVEMENT TO 0
+//RUNS COUNTDOWN TIMER (getMotion IS INSIDE COUNTDOWN TIMER FUNCTION)
+
+
+void loop() {
+    getLight();
+    getTemp();
+    postData();
+    movement = 0;
+    countdownTimer(frequency);
+    delay(100);
+}
+
+//While the countdown timer is running, movement is checked every second. 
+//Countdown digit is serial printed every second for ease of reference
+//Once movement is detected, break out of countdown timer loop. 
+//Temp and light is gotten again before posting temp, light and movement. 
+//Afterwhich, countdown timer begins from 0 again. 
+
+
+void countdownTimer(int max) {
+    while (max > 0) {
+        Serial.print(max); //FOR SERIAL MONITOR
+        Serial.println(" seconds remaining before next posting."); //FOR SERIAL MONITOR
+        Serial.println(); //FOR SERIAL MONITOR
+        max--;
+        if (getMove() == 1023 ) {
+            movement = 1;
+            Serial.println("MOTION DETECTED! INTERRUPT COUNTDOWN TIMER! Delay 5 seconds."); //FOR SERIAL MONITOR
+            Serial.println(); //FOR SERIAL MONITOR
+            delay(5000);
+            break;
+        }
+        delay(1000);
+    }
+}
+
+void postData()
+{
+    String temperature = String((int)(temp+0.5));
+    String lightStr = String((int)(light));
+    String move = String(movement);
+    String moves1 = String(moves);
+    String data = String("temp="+temperature+"&amp;movement="+move+"&amp;moves="+moves1+"&amp;light="+lightStr);
+    while(!client.connected())
+    {
+        Serial.println("Connecting to client: "); //FOR SERIAL MONITOR
+        client.connect(serverName, 80);
+    }
+    client.println("POST /arduinopost?username="+userName+" HTTP/1.1");
+    Serial.println("POST /arduinopost?username="+userName+" HTTP/1.1"); //FOR SERIAL MONITOR
+    client.println("Host: ambienators-nus.appspot.com");
+    Serial.println("Host: ambienators-nus.appspot.com"); //FOR SERIAL MONITOR
+    client.println("Connection: keep-alive");
+    Serial.println("Connection: keep-alive"); //FOR SERIAL MONITOR
+    client.print("Content-Length: ");
+    Serial.print("Content-Length: "); //FOR SERIAL MONITOR
+    client.println(data.length());
+    Serial.println(data.length()); //FOR SERIAL MONITOR
+    client.println("Cache-Control: max-age=0");
+    Serial.println("Cache-Control: max-age=0"); //FOR SERIAL MONITOR
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    Serial.println("Content-Type: application/x-www-form-urlencoded"); //FOR SERIAL MONITOR
+    client.println("Accept-Language: en-US,en;q=0.8");
+    Serial.println("Accept-Language: en-US,en;q=0.8"); //FOR SERIAL MONITOR
+    client.println();
+    Serial.println(); //FOR SERIAL MONITOR
+    client.print(data);
+    Serial.print(data); //FOR SERIAL MONITOR
+    Serial.println(); //FOR SERIAL MONITOR
+
+
+    char c;
+    while(client.available())
+    {
+        c = client.read();
+    }
+    client.stop();
+
+
+    Serial.println("Data posted:"); //FOR SERIAL MONITOR
+    Serial.println("Temperature:" + temperature); //FOR SERIAL MONITOR
+    Serial.println("Light Intensity:" + lightStr); //FOR SERIAL MONITOR
+    Serial.println("Motion Status:" + move); //FOR SERIAL MONITOR
+    Serial.println(); //FOR SERIAL MONITOR
+}
+
+void getTemp()
+{
+    temp = analogRead(tempPin);
+    temp = temp * 100  / 9.31;
+}
+
+
+void getLight() {
+    light = analogRead(lightPin);
+    light = (light * 100) / 1023;
+}
+
+
+int getMove() {
+    Serial.print("Checking motion - Motion status:");
+    Serial.println(analogRead(motionPin));
+    return analogRead(motionPin);
+}
+
+
+</pre>
+<br>
+</li>
+
+<li>In this code, modify the highlighted values.
+
+<div class="code">String userName = "ambienators.nus";</div> <br>
+    Modify the default username shown. Change it to the username of the Google Account you wish to be associated with your Arduino unit. It could be your personal Google account, or a company Google account. Google Apps accounts are also supported! The username is your email address without domain. For example, if your email is abc@gmail.com, set the username as abc.
+
+<div class="code">int frequency = 15*60;</div><br>
+      You can modify how often you want ambient data to be sent from the arduino to the cloud, in seconds. Default value is set to 15*60 seconds (15 minutes). You may modify this. However, to prevent server overload, we do not recommend you set a value less than 5 minutes.
+
+<div class="code">byte mac[] = {  0x00, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };</div><br>
+        Enter the MAC address for your Arduino ethernet shield here. Turn the ethernet shield over, and look at the back of the shield to find the MAC address. </li><br>
+
+<li>Save the changes and upload your sketch. Your unit should begin sending data to the Ambienators webapp.</li>
+</ol>
+
+  
+    </div>
+  </div>
+  <hr>
+  <h2 style="text-align: center;"><a href="#" class="show_usingwebapp">Using the Ambienators Webapp (+</a>/<a href="#" class="hide_usingwebapp">-)</a></h2>
+  <div class="usingwebapp" style="display:none;"><br>
+    <p>At this stage, we’ll assume that you have already got the hardware setup and working. </p>
+
+    <p><b>Login:</b><br>
+      At Ambienators, we believe in the importance of keeping your data save and secure, and privacy is important. Each Ambienators unit is associated with a Google Account. It could be your personal Google account, or a company Google account. Google Apps accounts are also supported! Simply click on the Login button you see on the top right corner of the page!</p>
+
+      <p><b>View real-time sensor data: </b><br>
+        Click on the “Sensors” tab! You’ll see three sets of data: Temperature, Light Intensity and Motion. </p>
+
+        <p><b>View sensor data history:</b><br>
+          Click on the “History” tab! You’ll see the three sets of data. It is a self-explanatory table with the date and time shown beside each set of readings. </p>
 
           <p><b>Change settings:</b><br>
-          Click on the “Settings” tab! You can adjust various settings pertaining to temperature units (display your temperature in degrees Celcius, Fahrenheit or Kelvin), time zone and history. Do remember to click save after adjusting the settings.</p>
+            Click on the “Settings” tab! You can adjust various settings pertaining to temperature units (display your temperature in degrees Celsius, Fahrenheit or Kelvin), time zone and history. Do remember to click save after adjusting the settings.</p>
 
-          <p>If you still have any enquiries, you may email us at ambienators.nus@gmail.com.</p>
-        </div>
+            <p>If you still have any enquiries, you may email us at ambienators.nus@gmail.com.</p>
+          </div>
 
-<hr>
+          <hr>
 
-          <h1 style="text-align: center;"><a href="#" class="show_aboutdevs">About the Developers (+</a>/<a href="#" class="hide_aboutdevs">-</a>)</h1>
+          <h2 style="text-align: center;"><a href="#" class="show_aboutdevs">About the Developers (+</a>/<a href="#" class="hide_aboutdevs">-)</a></h2>
           <div class="aboutdevs" style="display:none;">
             <div class="profilepics" style="text-align: center;">
               <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/t1.0-1/p160x160/10441053_10152109728592452_8604974622942767352_n.jpg"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/t1.0-1/c0.0.160.160/p160x160/1662267_773496726011047_1648696119_n.jpg">
 
-            <p>Ambienators was co-developed by two NUS Computer Engineering undergraduates, <a href="http://facebook.com/ipeech" target="_blank">Pee Choon Hian</a> and <a href="https://www.facebook.com/tania.chattopadhyay.1" target="_blank">Tania Chattopadhyay</a>.</p>
-            <p>This project was done under the NUS School-Of-Computing Orbital 2014 Summer Programme.</p>
-            <p>Choon Hian can be contacted at peech@nus.edu.sg.</p>
-            <p>Tania can be contacted at </p>
+              <p>Ambienators was co-developed by two NUS Computer Engineering undergraduates, <a href="http://facebook.com/ipeech" target="_blank">Pee Choon Hian</a> and <a href="https://www.facebook.com/tania.chattopadhyay.1" target="_blank">Tania Chattopadhyay</a>.</p>
+              <p>This project was done under the NUS School-Of-Computing Orbital 2014 Summer Programme.</p>
+              <p>Choon Hian can be contacted at peech@nus.edu.sg.</p>
+              <p>Tania can be contacted at tchatterjee5@gmail.com</p>
             </div>
           </div>
 
@@ -222,18 +459,18 @@
 
 
 
-        <hr>
+          <hr>
 
-        <footer>
-          <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
-        </footer>
+          <footer>
+            <p><img height="80px" width="80px" src="../images/red_black.png" />  Ambienators 2014</p>
+          </footer>
 
-      </div>
+        </div>
 
 
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="../bootstrap/js/bootstrap.min.js"></script>
-    </body>
-    </html>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+      </body>
+      </html>
